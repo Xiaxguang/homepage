@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="阿光音樂製作｜混音、編曲、免費宅錄與音樂作品集。未來將提供 Beat 伴奏授權販售。" />
-  <meta name="theme-color" content="#080b14" />
+  <meta name="description" content="阿光音樂製作｜混音、編曲、免費宅錄與 Beat 伴奏作品集。" />
+  <meta name="theme-color" content="#090d0c" />
   <title>阿光音樂製作｜混音・編曲・免費宅錄</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,302 +12,112 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="ambient ambient-a" aria-hidden="true"></div>
+  <div class="ambient ambient-b" aria-hidden="true"></div>
   <div class="noise" aria-hidden="true"></div>
 
   <header class="site-header" id="top">
     <a class="brand" href="#top" aria-label="回到首頁">
-      <span class="brand-mark">A</span>
-      <span>
-        <strong>阿光音樂製作</strong>
-        <small>A-KUANG MUSIC</small>
-      </span>
+      <span class="brand-mark" data-brand-mark>A</span>
+      <span><strong data-brand-name>阿光音樂製作</strong><small data-brand-en>A-KUANG MUSIC</small></span>
     </a>
-
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <span></span><span></span>
-      <span class="sr-only">開啟選單</span>
-    </button>
-
-    <nav class="site-nav" id="site-nav" aria-label="主要導覽">
-      <a href="#works">作品</a>
-      <a href="#services">服務</a>
-      <a href="#beat-store">Beat 商店</a>
-      <a href="#about">關於我</a>
-      <a class="nav-cta" href="#contact">合作詢問</a>
-    </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span class="sr-only">開啟選單</span></button>
+    <nav class="site-nav" id="site-nav" aria-label="主要導覽"></nav>
   </header>
 
-  <main>
-    <section class="hero section-shell">
+  <main id="page-sections">
+    <section class="hero section-shell" data-fixed-section="hero">
       <div class="hero-copy reveal">
-        <p class="eyebrow">MIXING · ARRANGEMENT · RECORDING</p>
-        <h1>
-          把你的聲音，<br />
-          做成<span>真正能被記住</span>的作品。
-        </h1>
-        <p class="hero-text">
-          我是音樂製作人阿光，提供混音、編曲與桃園宅錄服務。錄音空間免費使用，
-          只收實際製作費，讓創作者能用合理預算完成一首有質感的歌。
-        </p>
-
+        <p class="eyebrow" data-hero-eyebrow></p>
+        <h1><span data-hero-before></span><em data-hero-highlight></em><span data-hero-after></span></h1>
+        <p class="hero-text" data-hero-description></p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#works">聽我的作品</a>
-          <a class="button button-secondary" href="#contact">聊聊你的歌</a>
+          <a class="button button-primary" data-hero-primary></a>
+          <a class="button button-secondary" data-hero-secondary></a>
         </div>
-
-        <div class="hero-points" aria-label="服務特色">
-          <span>遠端合作</span>
-          <span>免費宅錄</span>
-          <span>長期合作優惠</span>
-        </div>
+        <div class="hero-points" data-hero-chips></div>
       </div>
 
-      <div class="hero-visual reveal" aria-label="音樂播放器視覺示意">
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <div class="player-card glass-card">
-          <div class="player-topline">
-            <span>NOW PRODUCING</span>
-            <span class="live-dot">LIVE</span>
+      <div class="hero-visual reveal">
+        <div class="studio-ring ring-one"></div><div class="studio-ring ring-two"></div>
+        <div class="mascot-stage">
+          <div class="frequency frequency-a"></div><div class="frequency frequency-b"></div>
+          <img class="hero-mascot" data-hero-mascot alt="阿光音樂製作角色形象" />
+          <div class="floating-card floating-card-a"><span>VOCAL</span><strong>READY</strong></div>
+          <div class="floating-card floating-card-b"><span>SESSION</span><strong>48 kHz</strong></div>
+          <div class="mini-console">
+            <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <span>AK MUSIC LAB</span>
           </div>
-          <div class="cover-art">
-            <div class="record-disc"></div>
-            <div class="cover-type">AK<br />MUSIC</div>
-          </div>
-          <div class="track-meta">
-            <div>
-              <strong>Make It Real</strong>
-              <span>Original Production</span>
-            </div>
-            <button class="round-play demo-trigger" type="button" aria-label="播放示意">▶</button>
-          </div>
-          <div class="waveform" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <div class="timeline"><span></span></div>
-          <div class="time-row"><span>01:24</span><span>03:18</span></div>
         </div>
       </div>
     </section>
 
-    <section class="stats-bar" aria-label="合作優勢">
-      <div><strong>1 對 1</strong><span>溝通製作方向</span></div>
-      <div><strong>0 元</strong><span>宅錄場地費</span></div>
-      <div><strong>遠端</strong><span>全台皆可合作</span></div>
-      <div><strong>長期</strong><span>合作方案優惠</span></div>
+    <section class="stats-bar" data-fixed-section="stats" aria-label="合作優勢"></section>
+
+    <section class="section-shell section-space content-section" id="works" data-section="works">
+      <div class="section-heading reveal"><div><p class="eyebrow" data-works-eyebrow></p><h2 data-works-title></h2></div><p data-works-description></p></div>
+      <div class="work-grid" id="work-grid"></div>
     </section>
 
-    <section class="section-shell section-space" id="works">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow">SELECTED WORKS</p>
-          <h2>精選作品</h2>
-        </div>
-        <p>這裡可放你完成的翻唱、原創、混音前後對比與編曲 Demo。</p>
-      </div>
-
-      <div class="work-grid">
-        <article class="work-card reveal">
-          <div class="work-cover work-cover-a">
-            <span>ORIGINAL</span>
-            <button class="work-play demo-trigger" type="button">▶</button>
-          </div>
-          <div class="work-info">
-            <div><h3>夜色訊號</h3><p>編曲・混音</p></div>
-            <span>POP / R&B</span>
-          </div>
-        </article>
-
-        <article class="work-card reveal">
-          <div class="work-cover work-cover-b">
-            <span>COVER</span>
-            <button class="work-play demo-trigger" type="button">▶</button>
-          </div>
-          <div class="work-info">
-            <div><h3>After Rain</h3><p>人聲混音</p></div>
-            <span>BALLAD</span>
-          </div>
-        </article>
-
-        <article class="work-card reveal">
-          <div class="work-cover work-cover-c">
-            <span>BEAT</span>
-            <button class="work-play demo-trigger" type="button">▶</button>
-          </div>
-          <div class="work-info">
-            <div><h3>Neon Heart</h3><p>Beat 製作</p></div>
-            <span>TRAP / POP</span>
-          </div>
-        </article>
-      </div>
-
-      <div class="demo-note reveal">
-        <span class="demo-note-icon">＋</span>
-        <p><strong>替換方式很簡單：</strong>之後只要把作品封面與音檔換上，就能直接當正式作品集使用。</p>
-      </div>
-    </section>
-
-    <section class="service-section section-space" id="services">
+    <section class="service-section section-space content-section" id="services" data-section="services">
       <div class="section-shell">
-        <div class="section-heading light reveal">
-          <div>
-            <p class="eyebrow">WHAT I DO</p>
-            <h2>製作服務</h2>
-          </div>
-          <p>不把流程講得很複雜，先理解你想要的聲音，再把作品做到位。</p>
-        </div>
-
-        <div class="service-grid">
-          <article class="service-card reveal">
-            <span class="service-number">01</span>
-            <div class="service-icon">MIX</div>
-            <h3>人聲混音</h3>
-            <p>修音、節奏整理、音色塑形、空間設計與母帶處理，讓人聲更穩、更清楚，也更貼合伴奏。</p>
-            <div class="price-row"><span>參考價格</span><strong>NT$2,500–3,500</strong></div>
-          </article>
-
-          <article class="service-card featured reveal">
-            <span class="service-badge">POPULAR</span>
-            <span class="service-number">02</span>
-            <div class="service-icon">ARR</div>
-            <h3>編曲製作</h3>
-            <p>從 Demo、和弦或旋律開始，完成歌曲架構、配器、節奏與氛圍，打造專屬於你的版本。</p>
-            <div class="price-row"><span>視難度報價</span><strong>NT$5,000–10,000</strong></div>
-          </article>
-
-          <article class="service-card reveal">
-            <span class="service-number">03</span>
-            <div class="service-icon">REC</div>
-            <h3>桃園免費宅錄</h3>
-            <p>提供錄音空間與基本錄音協助，不收場地與錄音費。可分天錄製，降低一次錄完的壓力。</p>
-            <div class="price-row"><span>錄音空間</span><strong>免費</strong></div>
-          </article>
-        </div>
+        <div class="section-heading light reveal"><div><p class="eyebrow" data-services-eyebrow></p><h2 data-services-title></h2></div><p data-services-description></p></div>
+        <div class="service-grid" id="service-grid"></div>
       </div>
     </section>
 
-    <section class="section-shell section-space process-section">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow">WORKFLOW</p>
-          <h2>合作流程</h2>
-        </div>
-        <p>遠端或現場都可以，流程會依作品狀況彈性調整。</p>
-      </div>
-
-      <div class="process-grid">
-        <article class="process-item reveal"><span>01</span><h3>先聊作品</h3><p>提供 Demo、參考歌與想要的方向，我會先確認需求與可行性。</p></article>
-        <article class="process-item reveal"><span>02</span><h3>確認報價</h3><p>依歌曲長度、軌數與製作難度報價，不用擔心隱藏費用。</p></article>
-        <article class="process-item reveal"><span>03</span><h3>製作與修改</h3><p>分階段確認方向，避免做到最後才發現彼此想像不同。</p></article>
-        <article class="process-item reveal"><span>04</span><h3>完成交付</h3><p>提供正式音檔；有需要也可討論演出版、伴奏版或社群短版。</p></article>
-      </div>
+    <section class="section-shell section-space process-section content-section" id="process" data-section="process">
+      <div class="section-heading reveal"><div><p class="eyebrow" data-process-eyebrow></p><h2 data-process-title></h2></div><p data-process-description></p></div>
+      <div class="process-grid" id="process-grid"></div>
     </section>
 
-    <section class="beat-section section-space" id="beat-store">
-      <div class="section-shell">
-        <div class="beat-intro reveal">
-          <p class="eyebrow">COMING SOON</p>
-          <h2>Beat 伴奏商店</h2>
-          <p>未來可直接試聽、挑選授權方案並線上付款。現在先保留完整商店版位，網站不必重做。</p>
-          <a class="button button-primary" href="#contact">搶先詢問 Beat</a>
-        </div>
-
+    <section class="beat-section section-space content-section" id="beat-store" data-section="beat-store">
+      <div class="section-shell beat-shell">
+        <div class="beat-intro reveal"><p class="eyebrow" data-beat-eyebrow></p><h2 data-beat-title></h2><p data-beat-description></p><a class="button button-primary" data-beat-button></a></div>
         <div class="beat-panel glass-card reveal">
-          <div class="beat-toolbar">
-            <strong>BEAT CATALOG</strong>
-            <div class="beat-filters" aria-label="Beat 類型篩選">
-              <button class="active" type="button" data-filter="all">全部</button>
-              <button type="button" data-filter="pop">Pop</button>
-              <button type="button" data-filter="rnb">R&B</button>
-              <button type="button" data-filter="trap">Trap</button>
-            </div>
-          </div>
-
-          <div class="beat-list">
-            <article class="beat-row" data-genre="rnb">
-              <button class="mini-play demo-trigger" type="button">▶</button>
-              <div class="mini-cover cover-1"></div>
-              <div class="beat-title"><strong>Moonline</strong><span>R&B / Chill</span></div>
-              <span>92 BPM</span><span>F# Minor</span><button class="license-button" type="button">即將開放</button>
-            </article>
-            <article class="beat-row" data-genre="pop">
-              <button class="mini-play demo-trigger" type="button">▶</button>
-              <div class="mini-cover cover-2"></div>
-              <div class="beat-title"><strong>City Bloom</strong><span>Pop / Bright</span></div>
-              <span>118 BPM</span><span>A Major</span><button class="license-button" type="button">即將開放</button>
-            </article>
-            <article class="beat-row" data-genre="trap">
-              <button class="mini-play demo-trigger" type="button">▶</button>
-              <div class="mini-cover cover-3"></div>
-              <div class="beat-title"><strong>Zero Gravity</strong><span>Trap / Dark</span></div>
-              <span>140 BPM</span><span>D Minor</span><button class="license-button" type="button">即將開放</button>
-            </article>
-          </div>
+          <div class="beat-toolbar"><strong>BEAT CATALOG</strong><div class="beat-filters" id="beat-filters"></div></div>
+          <div class="beat-list" id="beat-list"></div>
         </div>
       </div>
     </section>
 
-    <section class="section-shell section-space about-section" id="about">
+    <section class="section-shell section-space about-section content-section" id="about" data-section="about">
       <div class="about-card reveal">
-        <div class="about-portrait" aria-hidden="true">
-          <div class="portrait-monogram">光</div>
-        </div>
-        <div class="about-copy">
-          <p class="eyebrow">ABOUT</p>
-          <h2>不是只把聲音修漂亮，<br />而是把你的特色留下來。</h2>
-          <p>
-            我是阿光，主要協助歌手、VTuber、翻唱創作者與獨立音樂人完成混音、編曲和錄音。
-            我希望合作過程是可以放心溝通的，不需要懂太多專業術語，也不必一次就把所有東西準備到完美。
-          </p>
-          <div class="tag-list"><span>歌手</span><span>VTuber</span><span>翻唱創作者</span><span>獨立音樂人</span></div>
-        </div>
+        <div class="about-portrait"><div class="portrait-orbit"></div><img data-about-mascot alt="阿光角色形象" /></div>
+        <div class="about-copy"><p class="eyebrow" data-about-eyebrow></p><h2 data-about-title></h2><p data-about-description></p><div class="tag-list" data-about-tags></div></div>
       </div>
     </section>
 
-    <section class="contact-section section-space" id="contact">
+    <section class="contact-section section-space content-section" id="contact" data-section="contact">
       <div class="section-shell contact-grid">
-        <div class="contact-copy reveal">
-          <p class="eyebrow">LET'S CREATE</p>
-          <h2>有一首歌想完成？<br />先傳 Demo 給我聽。</h2>
-          <p>不確定該做混音還是重編也沒關係，可以先說你的預算、期限與參考歌曲。</p>
-          <div class="contact-links">
-            <a href="mailto:a26926291@gmail.com"><span>EMAIL</span><strong>a26926291@gmail.com</strong></a>
-            <a href="#"><span>INSTAGRAM / THREADS</span><strong>@請替換你的帳號</strong></a>
-            <a href="#"><span>LINE</span><strong>請替換你的聯絡連結</strong></a>
-          </div>
-        </div>
-
+        <div class="contact-copy reveal"><p class="eyebrow" data-contact-eyebrow></p><h2 data-contact-title></h2><p data-contact-description></p><div class="contact-links" id="contact-links"></div></div>
         <form class="contact-form glass-card reveal" id="contact-form">
           <label>怎麼稱呼你？<input type="text" name="name" placeholder="你的名字或暱稱" required /></label>
-          <label>想合作的項目？
-            <select name="service" required>
-              <option value="">請選擇</option>
-              <option>人聲混音</option>
-              <option>編曲製作</option>
-              <option>桃園宅錄</option>
-              <option>Beat 伴奏授權</option>
-              <option>其他合作</option>
-            </select>
-          </label>
+          <label>想合作的項目？<select name="service" id="service-select" required><option value="">請選擇</option></select></label>
           <label>作品與需求<textarea name="message" rows="5" placeholder="可以放 Demo 連結、參考歌、預算與希望完成時間" required></textarea></label>
-          <button class="button button-primary submit-button" type="submit">產生詢問信件</button>
-          <p class="form-note">此版本會開啟你的電子郵件軟體，不會把資料儲存在網站上。</p>
+          <button class="button button-primary submit-button" type="submit" data-form-button></button>
+          <p class="form-note">送出後會開啟你的電子郵件軟體，不會把訪客資料儲存在網站。</p>
         </form>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="brand footer-brand">
-      <span class="brand-mark">A</span>
-      <span><strong>阿光音樂製作</strong><small>A-KUANG MUSIC</small></span>
-    </div>
-    <p>© <span id="year"></span> A-Kuang Music. All rights reserved.</p>
-    <a href="#top">BACK TO TOP ↑</a>
+    <div class="brand footer-brand"><span class="brand-mark" data-brand-mark>A</span><span><strong data-brand-name>阿光音樂製作</strong><small data-brand-en>A-KUANG MUSIC</small></span></div>
+    <p>© <span id="year"></span> <span data-brand-en>A-KUANG MUSIC</span>. All rights reserved.</p>
+    <div class="footer-actions"><a href="admin.html" rel="nofollow">ADMIN</a><a href="#top">BACK TO TOP ↑</a></div>
   </footer>
 
-  <div class="toast" role="status" aria-live="polite">示意播放器：加入你的音檔後即可播放</div>
+  <dialog class="media-dialog" id="media-dialog">
+    <button class="dialog-close" type="button" aria-label="關閉">×</button>
+    <div class="media-dialog-body" id="media-dialog-body"></div>
+  </dialog>
+  <div class="toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="default-content.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
