@@ -1,141 +1,102 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
-  <title>作品集管理後台｜阿光音樂製作</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Xiaxguang｜網站管理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-  <section class="login-screen" id="login-screen">
-    <div class="login-card">
-      <div class="admin-logo">A</div>
-      <p class="kicker">PORTFOLIO CMS</p>
-      <h1>阿光作品集管理後台</h1>
-      <p id="login-description">登入後可編輯網站內容、面板順序，以及上傳圖片、音檔與影片。</p>
-      <form id="login-form">
-        <label>管理員 Email<input type="email" id="login-email" autocomplete="username" /></label>
-        <label>密碼<input type="password" id="login-password" autocomplete="current-password" /></label>
-        <button class="primary-button" type="submit">登入後台</button>
-      </form>
-      <button class="secondary-button" id="local-mode-button" type="button" hidden>開啟本機測試模式</button>
-      <p class="login-note" id="login-note"></p>
-    </div>
-  </section>
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="index.html">
+      <span>XG</span>
+      <div><strong>Xiaxguang</strong><small>Portfolio Admin</small></div>
+    </a>
+    <nav>
+      <button class="admin-nav active" data-panel="profilePanel">基本資料</button>
+      <button class="admin-nav" data-panel="servicesPanel">服務內容</button>
+      <button class="admin-nav" data-panel="worksPanel">作品管理</button>
+      <button class="admin-nav" data-panel="comparisonPanel">混音對比</button>
+      <button class="admin-nav" data-panel="settingsPanel">連線設定</button>
+    </nav>
+    <a class="preview-link" href="index.html" target="_blank">開啟公開網站 ↗</a>
+  </aside>
 
-  <div class="dashboard" id="dashboard" hidden>
-    <aside class="sidebar">
-      <a class="admin-brand" href="index.html"><span>A</span><div><strong>阿光音樂製作</strong><small>CONTENT MANAGER</small></div></a>
-      <nav id="admin-nav">
-        <button class="active" data-panel="general">網站與版面</button>
-        <button data-panel="works">作品管理</button>
-        <button data-panel="services">服務項目</button>
-        <button data-panel="process">合作流程</button>
-        <button data-panel="beats">Beat 商店</button>
-        <button data-panel="profile">關於與聯絡</button>
-        <button data-panel="backup">備份與設定</button>
-      </nav>
-      <div class="sidebar-bottom">
-        <span id="mode-badge">LOCAL MODE</span>
-        <a href="index.html" target="_blank" rel="noopener">開啟網站預覽 ↗</a>
-        <button id="logout-button" type="button">登出</button>
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div>
+        <p>CONTENT MANAGEMENT</p>
+        <h1>網站管理</h1>
       </div>
-    </aside>
+      <div class="topbar-actions">
+        <span class="save-status" id="saveStatus">尚未儲存</span>
+        <button class="button ghost" id="resetButton" type="button">還原預設</button>
+        <button class="button primary" id="saveButton" type="button">儲存更新</button>
+      </div>
+    </header>
 
-    <main class="admin-main">
-      <header class="admin-topbar">
-        <div><p class="kicker">PORTFOLIO CMS</p><h1 id="panel-title">網站與版面</h1></div>
-        <div class="topbar-actions"><span id="save-state">尚未修改</span><button class="secondary-button" id="preview-button" type="button">預覽</button><button class="primary-button" id="save-button" type="button">儲存並發布</button></div>
-      </header>
+    <section class="admin-panel active" id="profilePanel">
+      <div class="panel-heading"><h2>基本資料</h2><p>公開頁會立即套用這裡的名稱與聯絡方式。</p></div>
+      <div class="form-grid">
+        <label><span>英文名稱</span><input id="profileName" type="text"></label>
+        <label><span>中文稱呼</span><input id="profileAlias" type="text"></label>
+        <label class="wide"><span>首頁標語</span><input id="profileTagline" type="text"></label>
+        <label><span>Instagram 帳號</span><input id="profileInstagram" type="text"></label>
+        <label><span>LINE ID</span><input id="profileLine" type="text"></label>
+        <label class="wide"><span>關於標題</span><input id="aboutTitle" type="text"></label>
+        <label class="wide"><span>關於文字</span><textarea id="aboutBody" rows="5"></textarea></label>
+        <label class="wide"><span>首頁角色圖片網址或路徑</span><input id="heroCharacter" type="text"></label>
+        <label class="wide"><span>關於區角色圖片網址或路徑</span><input id="aboutCharacter" type="text"></label>
+      </div>
+    </section>
 
-      <div class="mode-warning" id="mode-warning" hidden></div>
+    <section class="admin-panel" id="servicesPanel">
+      <div class="panel-heading"><h2>服務內容</h2><p>只保留客戶需要看的服務介紹。</p></div>
+      <div id="servicesEditor" class="stack"></div>
+      <button class="button ghost add-button" id="addService" type="button">＋ 新增服務</button>
+    </section>
 
-      <section class="editor-panel active" data-editor-panel="general">
-        <div class="panel-heading"><div><h2>品牌與主視覺</h2><p>修改網站名稱、首頁文字、角色圖與整體配色。</p></div></div>
-        <div class="editor-grid two-columns">
-          <div class="editor-card">
-            <h3>品牌資料</h3>
-            <label>中文名稱<input data-path="brand.name" /></label>
-            <label>英文名稱<input data-path="brand.en" /></label>
-            <label>Logo 字元<input data-path="brand.mark" maxlength="2" /></label>
-            <label>管理／聯絡 Email<input data-path="brand.email" type="email" /></label>
-          </div>
-          <div class="editor-card">
-            <h3>網站配色與版型</h3>
-            <div class="color-row"><label>主色<input data-path="theme.accent" type="color" /></label><label>冷色<input data-path="theme.accent2" type="color" /></label><label>暖色<input data-path="theme.warm" type="color" /></label><label>背景<input data-path="theme.background" type="color" /></label></div>
-            <label>作品卡片欄數<select data-path="theme.worksColumns"><option value="2">2 欄</option><option value="3">3 欄</option><option value="4">4 欄</option></select></label>
-            <label>卡片圓角 <output id="radius-output"></output><input data-path="theme.cardRadius" type="range" min="8" max="42" step="1" /></label>
-            <label>角色圖位置<select data-path="theme.mascotPosition"><option value="right">右側</option><option value="left">左側</option></select></label>
-          </div>
-        </div>
-        <div class="editor-card wide-card">
-          <h3>首頁 Hero</h3>
-          <div class="editor-grid two-columns compact">
-            <label>小標<input data-path="hero.eyebrow" /></label>
-            <label>標題前段<input data-path="hero.titleBefore" /></label>
-            <label>強調文字<input data-path="hero.titleHighlight" /></label>
-            <label>標題後段<input data-path="hero.titleAfter" /></label>
-          </div>
-          <label>介紹<textarea data-path="hero.description" rows="4"></textarea></label>
-          <div class="editor-grid two-columns compact"><label>主要按鈕文字<input data-path="hero.primaryText" /></label><label>主要按鈕連結<input data-path="hero.primaryLink" /></label><label>次要按鈕文字<input data-path="hero.secondaryText" /></label><label>次要按鈕連結<input data-path="hero.secondaryLink" /></label></div>
-          <label>特色標籤（使用逗號分隔）<input data-list-path="hero.chips" /></label>
-          <div class="asset-field"><label>首頁角色圖片網址<input data-path="hero.mascot" /></label><label class="upload-button">上傳角色圖片<input class="single-asset-upload" data-upload-path="hero.mascot" data-kind="image" type="file" accept="image/*" /></label></div>
-          <div class="image-preview"><img id="hero-preview" alt="首頁角色預覽" /></div>
-        </div>
-        <div class="editor-card wide-card"><div class="card-heading"><div><h3>面板順序與顯示</h3><p>上下移動面板，或暫時隱藏不想公開的區塊。</p></div></div><div class="section-order-list" id="section-order-list"></div></div>
-      </section>
+    <section class="admin-panel" id="worksPanel">
+      <div class="panel-heading"><h2>作品管理</h2><p>可設定音檔、影片或外部作品連結。</p></div>
+      <div id="worksEditor" class="stack"></div>
+      <button class="button ghost add-button" id="addWork" type="button">＋ 新增作品</button>
+    </section>
 
-      <section class="editor-panel" data-editor-panel="works">
-        <div class="panel-heading"><div><h2>作品管理</h2><p>新增作品封面、音檔、影片或外部連結。可隨時排序與下架。</p></div><button class="primary-button add-item" data-type="works" type="button">＋ 新增作品</button></div>
-        <div class="editor-card wide-card heading-editor"><h3>區塊標題</h3><div class="editor-grid two-columns compact"><label>小標<input data-path="worksHeading.eyebrow" /></label><label>標題<input data-path="worksHeading.title" /></label></div><label>說明<textarea data-path="worksHeading.description" rows="2"></textarea></label></div>
-        <div class="collection-list" id="works-editor"></div>
-      </section>
+    <section class="admin-panel" id="comparisonPanel">
+      <div class="panel-heading"><h2>混音前後對比</h2><p>分別填入混音前與混音後的音檔網址。</p></div>
+      <div id="comparisonEditor" class="stack"></div>
+      <button class="button ghost add-button" id="addComparison" type="button">＋ 新增對比</button>
+    </section>
 
-      <section class="editor-panel" data-editor-panel="services">
-        <div class="panel-heading"><div><h2>服務項目</h2><p>編輯混音、編曲、宅錄與價格文字。</p></div><button class="primary-button add-item" data-type="services" type="button">＋ 新增服務</button></div>
-        <div class="editor-card wide-card heading-editor"><h3>區塊標題</h3><div class="editor-grid two-columns compact"><label>小標<input data-path="servicesHeading.eyebrow" /></label><label>標題<input data-path="servicesHeading.title" /></label></div><label>說明<textarea data-path="servicesHeading.description" rows="2"></textarea></label></div>
-        <div class="collection-list" id="services-editor"></div>
-      </section>
+    <section class="admin-panel" id="settingsPanel">
+      <div class="panel-heading"><h2>連線設定</h2><p>未設定 Supabase 時，內容會儲存在目前瀏覽器。</p></div>
+      <div class="settings-card">
+        <h3>目前模式</h3>
+        <p id="connectionMode"></p>
+        <ol>
+          <li>將 Supabase URL 與 anon key 填入 <code>config.js</code>。</li>
+          <li>在 Supabase SQL Editor 執行 <code>supabase-schema.sql</code>。</li>
+          <li>重新整理本頁後再儲存。</li>
+        </ol>
+      </div>
+      <div class="settings-card">
+        <h3>媒體檔案</h3>
+        <label class="upload-box">
+          <span>上傳圖片、音檔或影片</span>
+          <input id="mediaUpload" type="file" accept="image/*,audio/*,video/*">
+        </label>
+        <p class="upload-result" id="uploadResult"></p>
+      </div>
+    </section>
+  </main>
 
-      <section class="editor-panel" data-editor-panel="process">
-        <div class="panel-heading"><div><h2>合作流程</h2><p>調整每個合作階段的名稱與說明。</p></div><button class="primary-button add-item" data-type="process" type="button">＋ 新增步驟</button></div>
-        <div class="editor-card wide-card heading-editor"><h3>區塊標題</h3><div class="editor-grid two-columns compact"><label>小標<input data-path="processHeading.eyebrow" /></label><label>標題<input data-path="processHeading.title" /></label></div><label>說明<textarea data-path="processHeading.description" rows="2"></textarea></label></div>
-        <div class="collection-list" id="process-editor"></div>
-      </section>
-
-      <section class="editor-panel" data-editor-panel="beats">
-        <div class="panel-heading"><div><h2>Beat 商店</h2><p>管理 BPM、Key、曲風、試聽音檔與未來售價／授權文字。</p></div><button class="primary-button add-item" data-type="beats" type="button">＋ 新增 Beat</button></div>
-        <div class="editor-card wide-card heading-editor"><h3>區塊標題</h3><div class="editor-grid two-columns compact"><label>小標<input data-path="beatHeading.eyebrow" /></label><label>標題<input data-path="beatHeading.title" /></label></div><label>說明<textarea data-path="beatHeading.description" rows="2"></textarea></label><div class="editor-grid two-columns compact"><label>按鈕文字<input data-path="beatHeading.buttonText" /></label><label>按鈕連結<input data-path="beatHeading.buttonLink" /></label></div></div>
-        <div class="collection-list" id="beats-editor"></div>
-      </section>
-
-      <section class="editor-panel" data-editor-panel="profile">
-        <div class="panel-heading"><div><h2>關於我與聯絡</h2><p>替換角色圖片、自我介紹與社群連結。</p></div></div>
-        <div class="editor-grid two-columns">
-          <div class="editor-card"><h3>關於我</h3><label>小標<input data-path="about.eyebrow" /></label><label>標題<textarea data-path="about.title" rows="3"></textarea></label><label>介紹<textarea data-path="about.description" rows="7"></textarea></label><label>標籤（逗號分隔）<input data-list-path="about.tags" /></label><div class="asset-field vertical"><label>角色圖片網址<input data-path="about.mascot" /></label><label class="upload-button">上傳角色圖片<input class="single-asset-upload" data-upload-path="about.mascot" data-kind="image" type="file" accept="image/*" /></label></div><div class="image-preview profile-preview"><img id="about-preview" alt="關於我角色預覽" /></div></div>
-          <div class="editor-card"><h3>聯絡資料</h3><label>小標<input data-path="contact.eyebrow" /></label><label>標題<textarea data-path="contact.title" rows="3"></textarea></label><label>說明<textarea data-path="contact.description" rows="4"></textarea></label><label>Email<input data-path="contact.email" type="email" /></label><label>Instagram 顯示文字<input data-path="contact.instagramLabel" /></label><label>Instagram 網址<input data-path="contact.instagramUrl" type="url" /></label><label>LINE 顯示文字<input data-path="contact.lineLabel" /></label><label>LINE 網址<input data-path="contact.lineUrl" type="url" /></label><label>表單按鈕文字<input data-path="contact.formButton" /></label></div>
-        </div>
-      </section>
-
-      <section class="editor-panel" data-editor-panel="backup">
-        <div class="panel-heading"><div><h2>備份與系統設定</h2><p>匯出網站資料、匯入備份或回復預設內容。</p></div></div>
-        <div class="editor-grid two-columns">
-          <div class="editor-card"><h3>JSON 備份</h3><p>建議每次大量修改前先匯出備份。圖片與音檔本身仍保留在 Supabase Storage，JSON 只記錄網址與文字。</p><div class="button-stack"><button class="primary-button" id="export-button" type="button">匯出 JSON</button><label class="secondary-button file-button">匯入 JSON<input id="import-input" type="file" accept="application/json" /></label></div></div>
-          <div class="editor-card danger-card"><h3>回復預設內容</h3><p>會將目前編輯器內容重設為最初版本，按下後仍需再按「儲存並發布」才會覆蓋線上資料。</p><button class="danger-button" id="reset-button" type="button">回復預設</button></div>
-        </div>
-        <div class="editor-card wide-card"><h3>Supabase 連線狀態</h3><dl class="status-list"><div><dt>模式</dt><dd id="status-mode"></dd></div><div><dt>資料表</dt><dd>site_content</dd></div><div><dt>儲存空間</dt><dd id="status-bucket"></dd></div><div><dt>管理員</dt><dd id="status-admin"></dd></div></dl></div>
-      </section>
-    </main>
-  </div>
-
-  <div class="admin-toast" id="admin-toast"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="default-content.js"></script>
   <script src="config.js"></script>
+  <script src="default-content.js"></script>
   <script src="admin.js"></script>
 </body>
 </html>

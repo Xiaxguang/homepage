@@ -1,123 +1,185 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="阿光音樂製作｜混音、編曲、免費宅錄與 Beat 伴奏作品集。" />
-  <meta name="theme-color" content="#090d0c" />
-  <title>阿光音樂製作｜混音・編曲・免費宅錄</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d12">
+  <meta name="description" content="Xiaxguang 阿光｜音樂製作、混音、編曲與宅錄">
+  <title>Xiaxguang｜阿光</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="ambient ambient-a" aria-hidden="true"></div>
-  <div class="ambient ambient-b" aria-hidden="true"></div>
-  <div class="noise" aria-hidden="true"></div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
 
-  <header class="site-header" id="top">
+  <header class="site-header">
     <a class="brand" href="#top" aria-label="回到首頁">
-      <span class="brand-mark" data-brand-mark>A</span>
-      <span><strong data-brand-name>阿光音樂製作</strong><small data-brand-en>A-KUANG MUSIC</small></span>
+      <span class="brand-mark">XG</span>
+      <span class="brand-copy">
+        <strong id="headerName">Xiaxguang</strong>
+        <small id="headerAlias">阿光</small>
+      </span>
     </a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span class="sr-only">開啟選單</span></button>
-    <nav class="site-nav" id="site-nav" aria-label="主要導覽"></nav>
+
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="siteNav">
+      <a href="#works">作品</a>
+      <a href="#services">服務</a>
+      <a href="#about">關於</a>
+      <a class="nav-contact" href="#contact">聯絡合作</a>
+    </nav>
   </header>
 
-  <main id="page-sections">
-    <section class="hero section-shell" data-fixed-section="hero">
+  <main id="top">
+    <section class="hero section-shell">
       <div class="hero-copy reveal">
-        <p class="eyebrow" data-hero-eyebrow></p>
-        <h1><span data-hero-before></span><em data-hero-highlight></em><span data-hero-after></span></h1>
-        <p class="hero-text" data-hero-description></p>
+        <p class="eyebrow">MUSIC PRODUCER · MIXING · ARRANGEMENT</p>
+        <h1>
+          <span id="heroName">Xiaxguang</span>
+          <em id="heroAlias">阿光</em>
+        </h1>
+        <p class="hero-tagline" id="heroTagline">把聲音做成你的樣子。</p>
         <div class="hero-actions">
-          <a class="button button-primary" data-hero-primary></a>
-          <a class="button button-secondary" data-hero-secondary></a>
+          <a class="button button-primary" href="#works">聽作品</a>
+          <a class="button button-ghost" href="#contact">聯絡合作</a>
         </div>
-        <div class="hero-points" data-hero-chips></div>
-      </div>
-
-      <div class="hero-visual reveal">
-        <div class="studio-ring ring-one"></div><div class="studio-ring ring-two"></div>
-        <div class="mascot-stage">
-          <div class="frequency frequency-a"></div><div class="frequency frequency-b"></div>
-          <img class="hero-mascot" data-hero-mascot alt="阿光音樂製作角色形象" />
-          <div class="floating-card floating-card-a"><span>VOCAL</span><strong>READY</strong></div>
-          <div class="floating-card floating-card-b"><span>SESSION</span><strong>48 kHz</strong></div>
-          <div class="mini-console">
-            <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <span>AK MUSIC LAB</span>
-          </div>
+        <div class="hero-socials">
+          <a id="heroInstagram" href="https://www.instagram.com/xiaxguang/" target="_blank" rel="noreferrer">Instagram</a>
+          <a id="heroLine" href="https://line.me/ti/p/~bikabikahikari" target="_blank" rel="noreferrer">LINE</a>
         </div>
       </div>
-    </section>
 
-    <section class="stats-bar" data-fixed-section="stats" aria-label="合作優勢"></section>
-
-    <section class="section-shell section-space content-section" id="works" data-section="works">
-      <div class="section-heading reveal"><div><p class="eyebrow" data-works-eyebrow></p><h2 data-works-title></h2></div><p data-works-description></p></div>
-      <div class="work-grid" id="work-grid"></div>
-    </section>
-
-    <section class="service-section section-space content-section" id="services" data-section="services">
-      <div class="section-shell">
-        <div class="section-heading light reveal"><div><p class="eyebrow" data-services-eyebrow></p><h2 data-services-title></h2></div><p data-services-description></p></div>
-        <div class="service-grid" id="service-grid"></div>
-      </div>
-    </section>
-
-    <section class="section-shell section-space process-section content-section" id="process" data-section="process">
-      <div class="section-heading reveal"><div><p class="eyebrow" data-process-eyebrow></p><h2 data-process-title></h2></div><p data-process-description></p></div>
-      <div class="process-grid" id="process-grid"></div>
-    </section>
-
-    <section class="beat-section section-space content-section" id="beat-store" data-section="beat-store">
-      <div class="section-shell beat-shell">
-        <div class="beat-intro reveal"><p class="eyebrow" data-beat-eyebrow></p><h2 data-beat-title></h2><p data-beat-description></p><a class="button button-primary" data-beat-button></a></div>
-        <div class="beat-panel glass-card reveal">
-          <div class="beat-toolbar"><strong>BEAT CATALOG</strong><div class="beat-filters" id="beat-filters"></div></div>
-          <div class="beat-list" id="beat-list"></div>
+      <div class="hero-visual reveal" aria-hidden="true">
+        <div class="visual-grid"></div>
+        <div class="vinyl">
+          <div class="vinyl-ring"></div>
+          <div class="vinyl-label">XG</div>
+        </div>
+        <div class="waveform">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <img class="hero-character" id="heroCharacter" src="assets/characters/mascot-wave.png" alt="">
+        <div class="visual-caption">
+          <span>NOW PLAYING</span>
+          <strong>Xiaxguang Studio</strong>
         </div>
       </div>
     </section>
 
-    <section class="section-shell section-space about-section content-section" id="about" data-section="about">
+    <section class="section-shell metrics reveal" aria-label="服務特色">
+      <div>
+        <strong>Mixing</strong>
+        <span>讓人聲與編曲完整融合</span>
+      </div>
+      <div>
+        <strong>Arrangement</strong>
+        <span>從想法走到完整作品</span>
+      </div>
+      <div>
+        <strong>Recording</strong>
+        <span>桃園宅錄空間</span>
+      </div>
+    </section>
+
+    <section class="section-shell section-block" id="works">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">SELECTED WORKS</p>
+          <h2>作品</h2>
+        </div>
+        <div class="filter-tabs" id="workFilters" aria-label="作品分類"></div>
+      </div>
+      <div class="works-grid" id="worksGrid"></div>
+    </section>
+
+    <section class="section-shell section-block comparison-section" id="comparison">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">BEFORE / AFTER</p>
+          <h2>混音前後對比</h2>
+        </div>
+      </div>
+      <div class="comparison-grid" id="comparisonGrid"></div>
+    </section>
+
+    <section class="section-shell section-block" id="services">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">SERVICES</p>
+          <h2>合作服務</h2>
+        </div>
+      </div>
+      <div class="service-grid" id="serviceGrid"></div>
+    </section>
+
+    <section class="section-shell section-block about-grid" id="about">
+      <div class="about-copy reveal">
+        <p class="eyebrow">ABOUT</p>
+        <h2 id="aboutTitle">我是 Xiaxguang，也叫阿光。</h2>
+        <p id="aboutBody">專注在歌聲、情緒與編曲之間找到最適合的位置，讓每一首作品保留創作者原本的個性。</p>
+        <div class="signature">Xiaxguang</div>
+      </div>
       <div class="about-card reveal">
-        <div class="about-portrait"><div class="portrait-orbit"></div><img data-about-mascot alt="阿光角色形象" /></div>
-        <div class="about-copy"><p class="eyebrow" data-about-eyebrow></p><h2 data-about-title></h2><p data-about-description></p><div class="tag-list" data-about-tags></div></div>
+        <img id="aboutCharacter" src="assets/characters/mascot-seated.png" alt="">
+        <dl>
+          <div><dt>服務</dt><dd>混音、編曲、宅錄</dd></div>
+          <div><dt>合作</dt><dd>歌手、翻唱創作者、VTuber</dd></div>
+          <div><dt>地點</dt><dd>台灣・桃園</dd></div>
+        </dl>
       </div>
     </section>
 
-    <section class="contact-section section-space content-section" id="contact" data-section="contact">
-      <div class="section-shell contact-grid">
-        <div class="contact-copy reveal"><p class="eyebrow" data-contact-eyebrow></p><h2 data-contact-title></h2><p data-contact-description></p><div class="contact-links" id="contact-links"></div></div>
-        <form class="contact-form glass-card reveal" id="contact-form">
-          <label>怎麼稱呼你？<input type="text" name="name" placeholder="你的名字或暱稱" required /></label>
-          <label>想合作的項目？<select name="service" id="service-select" required><option value="">請選擇</option></select></label>
-          <label>作品與需求<textarea name="message" rows="5" placeholder="可以放 Demo 連結、參考歌、預算與希望完成時間" required></textarea></label>
-          <button class="button button-primary submit-button" type="submit" data-form-button></button>
-          <p class="form-note">送出後會開啟你的電子郵件軟體，不會把訪客資料儲存在網站。</p>
-        </form>
+    <section class="section-shell beat-banner reveal" id="beats">
+      <div>
+        <p class="eyebrow">BEAT STORE</p>
+        <h2>Original Beats</h2>
+        <span>Coming Soon</span>
+      </div>
+      <div class="beat-disc" aria-hidden="true"></div>
+    </section>
+
+    <section class="section-shell contact-section" id="contact">
+      <div class="contact-copy reveal">
+        <p class="eyebrow">CONTACT</p>
+        <h2>一起完成下一首作品。</h2>
+      </div>
+      <div class="contact-links reveal">
+        <a id="contactInstagram" href="https://www.instagram.com/xiaxguang/" target="_blank" rel="noreferrer">
+          <span>Instagram</span>
+          <strong>@xiaxguang</strong>
+        </a>
+        <a id="contactLine" href="https://line.me/ti/p/~bikabikahikari" target="_blank" rel="noreferrer">
+          <span>LINE</span>
+          <strong>bikabikahikari</strong>
+        </a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="brand footer-brand"><span class="brand-mark" data-brand-mark>A</span><span><strong data-brand-name>阿光音樂製作</strong><small data-brand-en>A-KUANG MUSIC</small></span></div>
-    <p>© <span id="year"></span> <span data-brand-en>A-KUANG MUSIC</span>. All rights reserved.</p>
-    <div class="footer-actions"><a href="admin.html" rel="nofollow">ADMIN</a><a href="#top">BACK TO TOP ↑</a></div>
+  <footer class="site-footer section-shell">
+    <span>© <span id="year"></span> Xiaxguang</span>
+    <span>Music Producer · Taiwan</span>
   </footer>
 
-  <dialog class="media-dialog" id="media-dialog">
-    <button class="dialog-close" type="button" aria-label="關閉">×</button>
-    <div class="media-dialog-body" id="media-dialog-body"></div>
-  </dialog>
-  <div class="toast" role="status" aria-live="polite"></div>
+  <div class="player-dock" id="playerDock" hidden>
+    <button class="player-close" id="playerClose" type="button" aria-label="關閉播放器">×</button>
+    <div class="player-art"><span>XG</span></div>
+    <div class="player-info">
+      <small id="playerType">AUDIO</small>
+      <strong id="playerTitle">作品名稱</strong>
+    </div>
+    <audio id="globalAudio" controls preload="metadata"></audio>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="default-content.js"></script>
   <script src="config.js"></script>
+  <script src="default-content.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
