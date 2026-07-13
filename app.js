@@ -172,6 +172,29 @@
     return (rows || []).filter(item => item && item.visible !== false);
   }
 
+  function normalizeFilterText(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replace(/[　\s/_-]+/g, "")
+      .trim();
+  }
+
+  function workMatchesCategory(item, category) {
+    if (!category || category === "全部") return true;
+    const active = normalizeFilterText(category);
+    const fields = [item.category, item.title, ...(item.tags || [])].map(normalizeFilterText).filter(Boolean);
+    if (fields.some(field => field === active || field.includes(active))) return true;
+
+    const aliases = {
+      原創: ["原創", "原创", "original", "作詞", "作词", "作曲", "創作", "创作"],
+      翻唱: ["翻唱", "cover", "翻唱作品"],
+      混音: ["混音", "mix", "mixing", "vocalmixing", "後製", "后制"],
+      編曲: ["編曲", "编曲", "arrange", "arrangement", "配樂", "配乐"]
+    };
+    const candidates = (aliases[category] || [category]).map(normalizeFilterText);
+    return fields.some(field => candidates.some(alias => field === alias || field.includes(alias)));
+  }
+
   function itemArtist(item) {
     return item.artist || "XIAXGUANG";
   }
@@ -390,7 +413,7 @@
     const grid = $("#worksGrid");
     if (!grid) return;
     const works = visibleItems(content.works);
-    const filtered = activeCategory === "全部" ? works : works.filter(item => item.category === activeCategory);
+    const filtered = works.filter(item => workMatchesCategory(item, activeCategory));
     if (!filtered.length) {
       grid.innerHTML = `<div class="empty-state">作品準備中</div>`;
       return;
