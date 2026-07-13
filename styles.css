@@ -835,6 +835,21 @@ img { max-width: 100%; display: block; }
   gap: 8px;
 }
 
+.section-tools {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.works-more-link {
+  min-height: 40px;
+  min-width: auto;
+  padding-inline: 16px;
+  font-size: .9rem;
+}
+
 .filter-tab {
   min-height: 40px;
   padding: 0 14px;
@@ -1762,6 +1777,9 @@ img { max-width: 100%; display: block; }
     flex-direction: column;
   }
   .filter-tabs {
+    justify-content: flex-start;
+  }
+  .section-tools {
     justify-content: flex-start;
   }
   .works-grid,
