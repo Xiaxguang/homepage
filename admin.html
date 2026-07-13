@@ -4,22 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Xiaxguang｜網站管理</title>
+  <title>XIAXGUANG｜網站管理</title>
+  <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="admin.css">
 </head>
 <body>
   <aside class="admin-sidebar">
     <a class="admin-brand" href="index.html">
-      <span>XG</span>
-      <div><strong>Xiaxguang</strong><small>Portfolio Admin</small></div>
+      <span class="wave-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      <div><strong>XIAXGUANG</strong><small>MUSIC PRODUCER</small></div>
     </a>
     <nav>
       <button class="admin-nav active" data-panel="profilePanel">基本資料</button>
+      <button class="admin-nav" data-panel="appearancePanel">視覺設定</button>
+      <button class="admin-nav" data-panel="sectionsPanel">區塊排序</button>
       <button class="admin-nav" data-panel="servicesPanel">服務內容</button>
       <button class="admin-nav" data-panel="worksPanel">作品管理</button>
+      <button class="admin-nav" data-panel="beatsPanel">Beats</button>
+      <button class="admin-nav" data-panel="processPanel">製作流程</button>
       <button class="admin-nav" data-panel="comparisonPanel">混音對比</button>
       <button class="admin-nav" data-panel="settingsPanel">連線設定</button>
     </nav>
@@ -40,22 +45,44 @@
     </header>
 
     <section class="admin-panel active" id="profilePanel">
-      <div class="panel-heading"><h2>基本資料</h2><p>公開頁會立即套用這裡的名稱與聯絡方式。</p></div>
+      <div class="panel-heading"><h2>基本資料</h2><p>品牌名稱固定為 XIAXGUANG，公開頁會使用這裡的文案與聯絡方式。</p></div>
       <div class="form-grid">
-        <label><span>英文名稱</span><input id="profileName" type="text"></label>
+        <label><span>英文名稱</span><input id="profileName" type="text" value="XIAXGUANG" readonly></label>
         <label><span>中文稱呼</span><input id="profileAlias" type="text"></label>
-        <label class="wide"><span>首頁標語</span><input id="profileTagline" type="text"></label>
+        <label><span>英文副標</span><input id="profileRole" type="text" value="MUSIC PRODUCER" readonly></label>
+        <label><span>所在地</span><input id="profileLocation" type="text"></label>
+        <label class="wide"><span>首頁小標</span><input id="heroKicker" type="text"></label>
+        <label class="wide"><span>首頁主標</span><input id="profileTagline" type="text"></label>
+        <label class="wide"><span>首頁強調行</span><input id="heroLine" type="text"></label>
+        <label class="wide"><span>首頁介紹</span><textarea id="heroDescription" rows="3"></textarea></label>
+        <label><span>Email</span><input id="profileEmail" type="email"></label>
         <label><span>Instagram 帳號</span><input id="profileInstagram" type="text"></label>
         <label><span>LINE ID</span><input id="profileLine" type="text"></label>
+        <label><span>YouTube 連結</span><input id="profileYoutube" type="url"></label>
         <label class="wide"><span>關於標題</span><input id="aboutTitle" type="text"></label>
         <label class="wide"><span>關於文字</span><textarea id="aboutBody" rows="5"></textarea></label>
-        <label class="wide"><span>首頁角色圖片網址或路徑</span><input id="heroCharacter" type="text"></label>
-        <label class="wide"><span>關於區角色圖片網址或路徑</span><input id="aboutCharacter" type="text"></label>
       </div>
     </section>
 
+    <section class="admin-panel" id="appearancePanel">
+      <div class="panel-heading"><h2>視覺設定</h2><p>可調整主色、角色圖片與 Hero 背景圖片。</p></div>
+      <div class="form-grid">
+        <label><span>主色</span><input id="accentColor" type="color"></label>
+        <label><span>青色重點</span><input id="accentCyan" type="color"></label>
+        <label><span>紫色重點</span><input id="accentViolet" type="color"></label>
+        <label class="wide with-upload"><span>Hero 背景圖片網址</span><input id="heroBackgroundUrl" type="text"><button class="button small" type="button" data-upload-target="heroBackgroundUrl">上傳</button></label>
+        <label class="wide with-upload"><span>Hero 角色圖片</span><input id="heroCharacter" type="text"><button class="button small" type="button" data-upload-target="heroCharacter">上傳</button></label>
+        <label class="wide with-upload"><span>About 角色圖片</span><input id="aboutCharacter" type="text"><button class="button small" type="button" data-upload-target="aboutCharacter">上傳</button></label>
+      </div>
+    </section>
+
+    <section class="admin-panel" id="sectionsPanel">
+      <div class="panel-heading"><h2>區塊排序</h2><p>控制公開頁區塊顯示、隱藏與排列順序。</p></div>
+      <div id="sectionsEditor" class="stack"></div>
+    </section>
+
     <section class="admin-panel" id="servicesPanel">
-      <div class="panel-heading"><h2>服務內容</h2><p>只保留客戶需要看的服務介紹。</p></div>
+      <div class="panel-heading"><h2>服務內容</h2><p>服務會出現在首頁摘要與完整服務區。</p></div>
       <div id="servicesEditor" class="stack"></div>
       <button class="button ghost add-button" id="addService" type="button">＋ 新增服務</button>
     </section>
@@ -64,6 +91,18 @@
       <div class="panel-heading"><h2>作品管理</h2><p>可設定音檔、影片或外部作品連結。</p></div>
       <div id="worksEditor" class="stack"></div>
       <button class="button ghost add-button" id="addWork" type="button">＋ 新增作品</button>
+    </section>
+
+    <section class="admin-panel" id="beatsPanel">
+      <div class="panel-heading"><h2>Beats 商店</h2><p>管理 Beat 封面、音檔、BPM、Key、曲風、授權文字與購買連結。</p></div>
+      <div id="beatsEditor" class="stack"></div>
+      <button class="button ghost add-button" id="addBeat" type="button">＋ 新增 Beat</button>
+    </section>
+
+    <section class="admin-panel" id="processPanel">
+      <div class="panel-heading"><h2>製作流程</h2><p>建議維持五個步驟，公開頁會依照順序顯示。</p></div>
+      <div id="processEditor" class="stack"></div>
+      <button class="button ghost add-button" id="addProcess" type="button">＋ 新增步驟</button>
     </section>
 
     <section class="admin-panel" id="comparisonPanel">
@@ -93,6 +132,8 @@
       </div>
     </section>
   </main>
+
+  <input id="targetUpload" type="file" accept="image/*,audio/*,video/*" hidden>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>

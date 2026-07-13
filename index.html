@@ -3,102 +3,143 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0d12">
-  <meta name="description" content="Xiaxguang 阿光｜音樂製作、混音、編曲與宅錄">
-  <title>Xiaxguang｜阿光</title>
+  <meta name="theme-color" content="#050706">
+  <meta name="description" content="XIAXGUANG 阿光｜MUSIC PRODUCER，提供混音、編曲、錄音與 Beats 授權合作。">
+  <title>XIAXGUANG｜MUSIC PRODUCER</title>
+  <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
-
-  <header class="site-header">
+  <header class="site-header" id="siteHeader">
     <a class="brand" href="#top" aria-label="回到首頁">
-      <span class="brand-mark">XG</span>
+      <span class="wave-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
       <span class="brand-copy">
-        <strong id="headerName">Xiaxguang</strong>
-        <small id="headerAlias">阿光</small>
+        <strong>XIAXGUANG</strong>
+        <small>MUSIC PRODUCER</small>
       </span>
     </a>
 
-    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav">
-      <span></span><span></span>
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="開啟選單">
+      <span></span><span></span><span></span>
     </button>
 
-    <nav class="site-nav" id="siteNav">
-      <a href="#works">作品</a>
-      <a href="#services">服務</a>
-      <a href="#about">關於</a>
-      <a class="nav-contact" href="#contact">聯絡合作</a>
+    <nav class="site-nav" id="siteNav" aria-label="主要導覽">
+      <a href="#top" data-nav="hero">首頁</a>
+      <a href="#works" data-nav="works">作品集</a>
+      <a href="#services" data-nav="services">服務項目</a>
+      <a href="#beats" data-nav="beats">Beats 商店</a>
+      <a href="#about" data-nav="about">關於我</a>
+      <a href="#contact" data-nav="contact">聯絡我</a>
     </nav>
+
+    <div class="header-actions">
+      <button class="icon-button" id="soundToggle" type="button" aria-label="靜音切換">
+        <span class="sound-icon" aria-hidden="true"></span>
+      </button>
+      <a class="header-cta" href="#contact">合作洽詢 <span aria-hidden="true">↗</span></a>
+      <button class="icon-button" id="themeToggle" type="button" aria-label="切換視覺模式">
+        <span class="moon-icon" aria-hidden="true"></span>
+      </button>
+    </div>
   </header>
 
-  <main id="top">
-    <section class="hero section-shell">
-      <div class="hero-copy reveal">
-        <p class="eyebrow">MUSIC PRODUCER · MIXING · ARRANGEMENT</p>
-        <h1>
-          <span id="heroName">Xiaxguang</span>
-          <em id="heroAlias">阿光</em>
-        </h1>
-        <p class="hero-tagline" id="heroTagline">把聲音做成你的樣子。</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#works">聽作品</a>
-          <a class="button button-ghost" href="#contact">聯絡合作</a>
-        </div>
-        <div class="hero-socials">
-          <a id="heroInstagram" href="https://www.instagram.com/xiaxguang/" target="_blank" rel="noreferrer">Instagram</a>
-          <a id="heroLine" href="https://line.me/ti/p/~bikabikahikari" target="_blank" rel="noreferrer">LINE</a>
-        </div>
-      </div>
+  <main id="top" class="page-flow">
+    <section class="hero section-shell" data-section="hero">
+      <div class="hero-studio">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="studio-lines" aria-hidden="true"></div>
 
-      <div class="hero-visual reveal" aria-hidden="true">
-        <div class="visual-grid"></div>
-        <div class="vinyl">
-          <div class="vinyl-ring"></div>
-          <div class="vinyl-label">XG</div>
+        <div class="hero-copy reveal">
+          <p class="hero-kicker" id="heroKicker">你好，我是 XIAXGUANG</p>
+          <h1>
+            <span>聲音設計・音樂製作</span>
+            <strong id="heroLine">混音 / 編曲 / 錄音</strong>
+          </h1>
+          <p id="heroDescription">用聲音打造情緒，用音樂傳遞故事。專業、用心、有效率，讓你的作品更上一層樓。</p>
+          <div class="service-tags" id="heroTags"></div>
+          <div class="hero-actions">
+            <a class="button primary" href="#contact">合作洽詢 <span aria-hidden="true">→</span></a>
+            <button class="button secondary" id="heroPlayButton" type="button" disabled>播放作品 <span aria-hidden="true">▶</span></button>
+          </div>
         </div>
-        <div class="waveform">
-          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+
+        <div class="hero-character-wrap reveal" aria-hidden="true">
+          <img id="heroCharacter" class="hero-character" src="assets/characters/mascot-seated.png" alt="" fetchpriority="high">
+          <span class="character-shadow"></span>
         </div>
-        <img class="hero-character" id="heroCharacter" src="assets/characters/mascot-wave.png" alt="">
-        <div class="visual-caption">
-          <span>NOW PLAYING</span>
-          <strong>Xiaxguang Studio</strong>
-        </div>
+
+        <aside class="hero-player glass-panel reveal" id="heroPlayer" aria-label="最新作品播放器">
+          <div class="panel-title">
+            <strong>最新作品</strong>
+            <a href="#works">查看全部</a>
+          </div>
+          <div class="now-playing">
+            <div class="track-cover" id="heroPlayerCover"></div>
+            <div class="track-copy">
+              <strong id="heroPlayerTitle">尚無可播放作品</strong>
+              <span id="heroPlayerArtist">XIAXGUANG</span>
+              <div class="mini-wave" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+          </div>
+          <div class="player-progress">
+            <input id="playerSeek" type="range" min="0" max="1000" value="0" disabled aria-label="播放進度">
+            <div><span id="playerCurrent">00:00</span><span id="playerDuration">00:00</span></div>
+          </div>
+          <div class="player-controls">
+            <button id="prevTrack" type="button" disabled aria-label="上一首">‹</button>
+            <button id="mainPlay" class="play-main" type="button" disabled aria-label="播放或暫停">▶</button>
+            <button id="nextTrack" type="button" disabled aria-label="下一首">›</button>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section class="section-shell metrics reveal" aria-label="服務特色">
-      <div>
-        <strong>Mixing</strong>
-        <span>讓人聲與編曲完整融合</span>
-      </div>
-      <div>
-        <strong>Arrangement</strong>
-        <span>從想法走到完整作品</span>
-      </div>
-      <div>
-        <strong>Recording</strong>
-        <span>桃園宅錄空間</span>
-      </div>
+    <section class="dashboard section-shell" data-section="dashboard" aria-label="首頁摘要">
+      <article class="dashboard-panel services-panel glass-panel reveal">
+        <div class="panel-title">
+          <strong>服務項目</strong>
+          <a href="#services">VIEW ALL</a>
+        </div>
+        <div id="serviceSummary" class="service-summary"></div>
+        <a class="panel-link" href="#services">了解更多服務 <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="dashboard-panel featured-panel glass-panel reveal">
+        <div class="panel-title">
+          <strong>精選作品</strong>
+          <a href="#works">VIEW ALL</a>
+        </div>
+        <div id="featuredWorks" class="featured-strip"></div>
+        <div class="strip-dots" aria-hidden="true"><i class="active"></i><i></i><i></i><i></i><i></i></div>
+      </article>
+
+      <article class="dashboard-panel beats-panel glass-panel reveal">
+        <div class="panel-title">
+          <strong>Beats 商店</strong>
+          <a href="#beats">VIEW ALL</a>
+        </div>
+        <div id="beatSummary" class="beat-summary"></div>
+        <a class="panel-link" href="#beats">前往 Beats 商店 <span aria-hidden="true">→</span></a>
+      </article>
     </section>
 
-    <section class="section-shell section-block" id="works">
+    <section class="section-shell content-section" id="works" data-section="works">
       <div class="section-heading reveal">
         <div>
           <p class="eyebrow">SELECTED WORKS</p>
-          <h2>作品</h2>
+          <h2>作品集</h2>
         </div>
         <div class="filter-tabs" id="workFilters" aria-label="作品分類"></div>
       </div>
       <div class="works-grid" id="worksGrid"></div>
     </section>
 
-    <section class="section-shell section-block comparison-section" id="comparison">
+    <section class="section-shell content-section" id="comparison" data-section="comparison">
       <div class="section-heading reveal">
         <div>
           <p class="eyebrow">BEFORE / AFTER</p>
@@ -108,74 +149,76 @@
       <div class="comparison-grid" id="comparisonGrid"></div>
     </section>
 
-    <section class="section-shell section-block" id="services">
+    <section class="section-shell content-section" id="services" data-section="services">
       <div class="section-heading reveal">
         <div>
           <p class="eyebrow">SERVICES</p>
-          <h2>合作服務</h2>
+          <h2>服務項目</h2>
         </div>
       </div>
       <div class="service-grid" id="serviceGrid"></div>
     </section>
 
-    <section class="section-shell section-block about-grid" id="about">
+    <section class="section-shell content-section" id="beats" data-section="beats">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">BEATS STORE</p>
+          <h2>Beats 商店</h2>
+        </div>
+      </div>
+      <div class="beat-store-grid" id="beatStore"></div>
+    </section>
+
+    <section class="section-shell about-process glass-panel" id="about" data-section="about">
       <div class="about-copy reveal">
         <p class="eyebrow">ABOUT</p>
-        <h2 id="aboutTitle">我是 Xiaxguang，也叫阿光。</h2>
-        <p id="aboutBody">專注在歌聲、情緒與編曲之間找到最適合的位置，讓每一首作品保留創作者原本的個性。</p>
-        <div class="signature">Xiaxguang</div>
+        <h2 id="aboutTitle">我是 XIAXGUANG，也叫阿光。</h2>
+        <p id="aboutBody"></p>
+        <div class="social-links" id="socialLinks"></div>
+        <img id="aboutCharacter" class="about-character" src="assets/characters/mascot-crossed.png" alt="" loading="lazy">
       </div>
-      <div class="about-card reveal">
-        <img id="aboutCharacter" src="assets/characters/mascot-seated.png" alt="">
-        <dl>
-          <div><dt>服務</dt><dd>混音、編曲、宅錄</dd></div>
-          <div><dt>合作</dt><dd>歌手、翻唱創作者、VTuber</dd></div>
-          <div><dt>地點</dt><dd>台灣・桃園</dd></div>
-        </dl>
+      <div class="process-copy reveal">
+        <p class="eyebrow">PROCESS</p>
+        <h2>製作流程</h2>
+        <p>從溝通到成品，提供穩定清楚的製作流程。</p>
+        <div class="process-steps" id="processSteps"></div>
       </div>
     </section>
 
-    <section class="section-shell beat-banner reveal" id="beats">
-      <div>
-        <p class="eyebrow">BEAT STORE</p>
-        <h2>Original Beats</h2>
-        <span>Coming Soon</span>
-      </div>
-      <div class="beat-disc" aria-hidden="true"></div>
-    </section>
-
-    <section class="section-shell contact-section" id="contact">
-      <div class="contact-copy reveal">
+    <section class="section-shell contact-section" id="contact" data-section="contact">
+      <div class="contact-card glass-panel reveal">
         <p class="eyebrow">CONTACT</p>
         <h2>一起完成下一首作品。</h2>
-      </div>
-      <div class="contact-links reveal">
-        <a id="contactInstagram" href="https://www.instagram.com/xiaxguang/" target="_blank" rel="noreferrer">
-          <span>Instagram</span>
-          <strong>@xiaxguang</strong>
-        </a>
-        <a id="contactLine" href="https://line.me/ti/p/~bikabikahikari" target="_blank" rel="noreferrer">
-          <span>LINE</span>
-          <strong>bikabikahikari</strong>
-        </a>
+        <p>準備好 demo、參考曲或需求方向，就可以開始討論。</p>
+        <div class="contact-actions" id="contactActions"></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer section-shell">
-    <span>© <span id="year"></span> Xiaxguang</span>
-    <span>Music Producer · Taiwan</span>
+    <div class="footer-brand">
+      <span class="wave-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      <div><strong>XIAXGUANG</strong><small>MUSIC PRODUCER</small></div>
+    </div>
+    <div class="footer-meta">
+      <span id="footerEmail">a26926291@gmail.com</span>
+      <span id="footerLocation">Taiwan, Taoyuan</span>
+      <span>© <span id="year"></span> XIAXGUANG Music Producer. All rights reserved.</span>
+    </div>
+    <span class="footer-wave" aria-hidden="true"></span>
   </footer>
 
   <div class="player-dock" id="playerDock" hidden>
-    <button class="player-close" id="playerClose" type="button" aria-label="關閉播放器">×</button>
-    <div class="player-art"><span>XG</span></div>
-    <div class="player-info">
-      <small id="playerType">AUDIO</small>
-      <strong id="playerTitle">作品名稱</strong>
+    <div class="dock-cover" id="dockCover"></div>
+    <div class="dock-info">
+      <small>NOW PLAYING</small>
+      <strong id="dockTitle">作品名稱</strong>
     </div>
-    <audio id="globalAudio" controls preload="metadata"></audio>
+    <button id="dockPlay" type="button" disabled aria-label="播放或暫停">▶</button>
+    <button class="player-close" id="playerClose" type="button" aria-label="關閉播放器">×</button>
   </div>
+
+  <audio id="globalAudio" preload="metadata"></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
