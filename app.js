@@ -4,7 +4,7 @@
   const CONFIG = window.PORTFOLIO_CONFIG || {};
   const DEFAULTS = window.DEFAULT_CONTENT || {};
   const STORAGE_KEY = "xiaxguang_portfolio_content_v2";
-  const LEGACY_WORK_IDS = new Set(["demo-original", "demo-cover", "demo-arrangement", "demo-mix"]);
+  const LEGACY_WORK_IDS = new Set(["demo-original", "demo-cover", "demo-arrangement", "demo-mix", "track-neon-velocity", "track-demon-core", "track-astral-gate", "track-echo-rift", "track-kaoliang-nights"]);
 
   let content = clone(DEFAULTS);
   let activeCategory = "全部";
@@ -70,6 +70,14 @@
     return mergeById(DEFAULTS.works || [], cleaned, "id");
   }
 
+  function normalizeBeats(rows) {
+    const defaultIds = new Set((DEFAULTS.beats || []).map(row => String(row.id || "")));
+    const cleaned = Array.isArray(rows)
+      ? rows.filter(row => row && (defaultIds.has(String(row.id || "")) || row.audioUrl || row.purchaseUrl))
+      : [];
+    return mergeById(DEFAULTS.beats || [], cleaned, "id");
+  }
+
   function normalizeContent(input) {
     const merged = deepMerge(clone(DEFAULTS), input || {});
     merged.profile = { ...(DEFAULTS.profile || {}), ...(merged.profile || {}) };
@@ -78,7 +86,7 @@
       .map((section, index) => ({ ...section, order: Number(section.order || index + 1), visible: section.visible !== false }))
       .sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
     merged.process = Array.isArray(merged.process) && merged.process.length ? merged.process : clone(DEFAULTS.process || []);
-    merged.beats = Array.isArray(merged.beats) ? merged.beats : clone(DEFAULTS.beats || []);
+    merged.beats = normalizeBeats(merged.beats);
     merged.works = normalizeWorks(merged.works);
     merged.services = Array.isArray(merged.services) ? merged.services : [];
     merged.comparisons = Array.isArray(merged.comparisons) ? merged.comparisons : [];
@@ -380,6 +388,9 @@
 
     if (store) {
       store.innerHTML = beats.length ? beats.map(item => {
+        const preview = item.audioUrl
+          ? `<audio class="beat-preview" controls preload="metadata" src="${escapeHtml(item.audioUrl)}"></audio>`
+          : "";
         const action = item.purchaseUrl
           ? `<a class="button primary" href="${escapeHtml(item.purchaseUrl)}" target="_blank" rel="noreferrer">${escapeHtml(item.priceLabel || "購買授權")}</a>`
           : `<a class="button secondary" href="#contact">${escapeHtml(item.priceLabel || "洽詢授權")}</a>`;
@@ -393,6 +404,7 @@
                 <span>${escapeHtml(item.key || "-")}</span>
                 <span>${escapeHtml(item.genre || "-")}</span>
               </div>
+              ${preview}
               ${action}
             </div>
           </article>
@@ -401,15 +413,27 @@
     }
   }
 
+  function processIcon(index) {
+    const attrs = 'aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
+    const icons = [
+      `<svg ${attrs}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+      `<svg ${attrs}><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>`,
+      `<svg ${attrs}><path d="M21 4h-7"/><path d="M10 4H3"/><circle cx="12" cy="4" r="2"/><path d="M21 12h-9"/><path d="M8 12H3"/><circle cx="10" cy="12" r="2"/><path d="M21 20h-5"/><path d="M12 20H3"/><circle cx="14" cy="20" r="2"/></svg>`,
+      `<svg ${attrs}><path d="M21 12a9 9 0 0 1-15.36 6.36L3 16"/><path d="M3 21v-5h5"/><path d="M3 12a9 9 0 0 1 15.36-6.36L21 8"/><path d="M21 3v5h-5"/></svg>`,
+      `<svg ${attrs}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>`
+    ];
+    return icons[index] || icons[0];
+  }
+
   function renderProcess() {
     const target = $("#processSteps");
     if (!target) return;
     target.innerHTML = (content.process || []).slice(0, 5).map((item, index) => `
       <div class="process-step reveal">
-        <span class="step-icon">${String(index + 1).padStart(2, "0")}</span>
+        <span class="step-icon">${processIcon(index)}</span>
         <small>${String(index + 1).padStart(2, "0")}</small>
         <strong>${escapeHtml(item.title || "")}</strong>
-        <span>${escapeHtml(item.description || "")}</span>
+        <span class="step-description">${escapeHtml(item.description || "")}</span>
       </div>
     `).join("");
   }

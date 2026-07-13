@@ -25,9 +25,6 @@
 - `assets/media/studio-hero.webp`
 - `assets/media/cover-echo.webp`
 - `assets/media/cover-moon-gate.webp`
-- `assets/media/cover-crystal.webp`
-- `assets/media/beat-night-drive.webp`
-- `assets/media/cover-spectrum.webp`
 - `assets/media/studio-notes.webp`
 - `assets/media/cover-neon-velocity.webp`
 - `assets/media/cover-demon-core.webp`
@@ -35,7 +32,7 @@
 - `assets/media/cover-echo-rift.webp`
 - `assets/media/cover-kaoliang-nights.webp`
 
-音樂作品放在：
+Beat 音檔放在：
 
 - `assets/audio/neon-velocity.mp3`
 - `assets/audio/demon-core.mp3`
