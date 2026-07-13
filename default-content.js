@@ -31,7 +31,8 @@ window.DEFAULT_CONTENT = {
     aboutBody: "音樂製作人、聲音設計師。從混音、編曲到人聲錄音，專注於把作品品質與情緒表達推進到更完整的位置。合作過多位歌手、YouTuber 與創作者，期待與你一起創造更多可能。",
     instagram: "xiaxguang",
     lineId: "bikabikahikari",
-    discord: "xiaxguang",
+    discord: "Xiaxguang",
+    discordUrl: "https://discord.com/users/577455290841038850",
     youtube: "",
     heroCharacter: "assets/characters/mascot-seated.png",
     aboutCharacter: "assets/characters/mascot-crossed.png"

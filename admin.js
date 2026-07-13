@@ -93,9 +93,18 @@
     return hasPricing ? rows : clone(defaults);
   }
 
+  function normalizeProfile(profile) {
+    const output = { ...(DEFAULTS.profile || {}), ...(profile || {}) };
+    if (!output.discordUrl && ["xiaxguang", "Xiaxguang#7301"].includes(output.discord)) {
+      output.discord = DEFAULTS.profile?.discord || "Xiaxguang";
+      output.discordUrl = DEFAULTS.profile?.discordUrl || "";
+    }
+    return output;
+  }
+
   function normalizeState(input) {
     const merged = deepMerge(clone(DEFAULTS), input || {});
-    merged.profile = { ...(DEFAULTS.profile || {}), ...(merged.profile || {}) };
+    merged.profile = normalizeProfile(merged.profile);
     merged.appearance = { ...(DEFAULTS.appearance || {}), ...(merged.appearance || {}) };
     merged.sections = mergeById(DEFAULTS.sections || [], merged.sections || [], "id")
       .map((section, index) => ({ ...section, order: Number(section.order || index + 1), visible: section.visible !== false }))
@@ -168,6 +177,7 @@
     $("#profileInstagram").value = p.instagram || "";
     $("#profileLine").value = p.lineId || "";
     $("#profileDiscord").value = p.discord || "";
+    $("#profileDiscordUrl").value = p.discordUrl || "";
     $("#profileYoutube").value = p.youtube || "";
     $("#aboutTitle").value = p.aboutTitle || "";
     $("#aboutBody").value = p.aboutBody || "";
@@ -188,6 +198,7 @@
       instagram: $("#profileInstagram").value.trim().replace(/^@/, ""),
       lineId: $("#profileLine").value.trim(),
       discord: $("#profileDiscord").value.trim(),
+      discordUrl: $("#profileDiscordUrl").value.trim(),
       youtube: $("#profileYoutube").value.trim(),
       aboutTitle: $("#aboutTitle").value.trim(),
       aboutBody: $("#aboutBody").value.trim()

@@ -85,9 +85,18 @@
     return hasPricing ? rows : clone(defaults);
   }
 
+  function normalizeProfile(profile) {
+    const output = { ...(DEFAULTS.profile || {}), ...(profile || {}) };
+    if (!output.discordUrl && ["xiaxguang", "Xiaxguang#7301"].includes(output.discord)) {
+      output.discord = DEFAULTS.profile?.discord || "Xiaxguang";
+      output.discordUrl = DEFAULTS.profile?.discordUrl || "";
+    }
+    return output;
+  }
+
   function normalizeContent(input) {
     const merged = deepMerge(clone(DEFAULTS), input || {});
-    merged.profile = { ...(DEFAULTS.profile || {}), ...(merged.profile || {}) };
+    merged.profile = normalizeProfile(merged.profile);
     merged.appearance = { ...(DEFAULTS.appearance || {}), ...(merged.appearance || {}) };
     merged.sections = mergeById(DEFAULTS.sections || [], merged.sections || [], "id")
       .map((section, index) => ({ ...section, order: Number(section.order || index + 1), visible: section.visible !== false }))
@@ -219,7 +228,7 @@
     if (p.instagram) links.push({ label: withText ? "Instagram" : "IG", href: instagramUrl(p.instagram) });
     if (p.lineId) links.push({ label: withText ? "LINE" : "LINE", href: lineUrl(p.lineId) });
     if (p.email) links.push({ label: withText ? "Email" : "MAIL", href: mailUrl(p.email) });
-    if (p.discord) links.push({ label: withText ? `Discord: ${p.discord}` : "DC", textOnly: true });
+    if (p.discord) links.push({ label: withText ? `Discord: ${p.discord}` : "DC", href: p.discordUrl || "", textOnly: !p.discordUrl });
     if (p.youtube) links.push({ label: withText ? "YouTube" : "YT", href: p.youtube });
     return links.map(link => link.textOnly
       ? `<span title="${escapeHtml(link.label)}">${escapeHtml(link.label)}</span>`
@@ -233,7 +242,12 @@
     if (p.email) rows.push(`<a class="button primary" href="${escapeHtml(mailUrl(p.email))}">Email 合作洽詢</a>`);
     if (p.instagram) rows.push(`<a class="button secondary" href="${escapeHtml(instagramUrl(p.instagram))}" target="_blank" rel="noreferrer">Instagram</a>`);
     if (p.lineId) rows.push(`<a class="button secondary" href="${escapeHtml(lineUrl(p.lineId))}" target="_blank" rel="noreferrer">LINE</a>`);
-    if (p.discord) rows.push(`<span class="button secondary static-contact">DC: ${escapeHtml(p.discord)}</span>`);
+    if (p.discord) {
+      rows.push(p.discordUrl
+        ? `<a class="button secondary" href="${escapeHtml(p.discordUrl)}" target="_blank" rel="noreferrer">DC: ${escapeHtml(p.discord)}</a>`
+        : `<span class="button secondary static-contact">DC: ${escapeHtml(p.discord)}</span>`
+      );
+    }
     return rows.join("");
   }
 
