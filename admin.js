@@ -16,10 +16,12 @@
     about: "關於我與流程",
     contact: "聯絡區"
   };
+  const WORK_CATEGORIES = ["原創", "翻唱", "混音", "編曲"];
 
   let state = clone(DEFAULTS);
   let supabaseClient = null;
   let pendingUploadTargetId = "";
+  const collapsedWorkGroups = new Set();
 
   const $ = (selector, parent = document) => parent.querySelector(selector);
   const $$ = (selector, parent = document) => Array.from(parent.querySelectorAll(selector));
@@ -304,31 +306,83 @@
     });
   }
 
+  function ensureWorkIds() {
+    state.works = (state.works || []).map((item, index) => {
+      if (item.id) return item;
+      return { ...item, id: `work-${Date.now()}-${index}` };
+    });
+  }
+
+  function getWorkCategories() {
+    const customCategories = (state.works || [])
+      .map(item => item.category || "未分類")
+      .filter(category => category && !WORK_CATEGORIES.includes(category));
+    return [...WORK_CATEGORIES, ...new Set(customCategories)];
+  }
+
+  function getWorkCategoryOptions(currentCategory) {
+    const categories = [...WORK_CATEGORIES];
+    if (currentCategory && !categories.includes(currentCategory)) categories.push(currentCategory);
+    return categories;
+  }
+
+  function renderWorkCard(item, index) {
+    const coverId = `workCover${index}`;
+    const mediaId = `workMedia${index}`;
+    const options = getWorkCategoryOptions(item.category || "原創")
+      .map(category => `<option ${item.category === category ? "selected" : ""}>${escapeHtml(category)}</option>`)
+      .join("");
+    return `
+      <article class="editor-card" data-work-index="${index}" data-work-id="${escapeHtml(item.id || "")}">
+        <div class="editor-card-head">
+          <strong>${escapeHtml(item.title || `作品 ${index + 1}`)}</strong>
+          <div class="card-actions"><button class="button danger small" type="button" data-remove-work-id="${escapeHtml(item.id || "")}">刪除</button></div>
+        </div>
+        <div class="editor-grid">
+          <label><span>作品名稱</span><input data-work-field="title" data-index="${index}" value="${escapeHtml(item.title || "")}"></label>
+          <label><span>作者</span><input data-work-field="artist" data-index="${index}" value="${escapeHtml(item.artist || "XIAXGUANG")}"></label>
+          <label><span>分類</span><select data-work-field="category" data-index="${index}">${options}</select></label>
+          <label><span>內容類型</span><select data-work-field="type" data-index="${index}">${["audio","video","link"].map(type => `<option value="${type}" ${item.type === type ? "selected" : ""}>${type}</option>`).join("")}</select></label>
+          <label class="wide"><span>標籤（逗號分隔）</span><input data-work-field="tags" data-index="${index}" value="${escapeHtml((item.tags || []).join(", "))}"></label>
+          <label class="wide with-upload"><span>封面圖片網址或路徑</span><input id="${coverId}" data-work-field="coverUrl" data-index="${index}" value="${escapeHtml(item.coverUrl || "")}"><button class="button small" type="button" data-upload-target="${coverId}">上傳</button></label>
+          <label class="wide with-upload"><span>音檔或影片網址</span><input id="${mediaId}" data-work-field="mediaUrl" data-index="${index}" value="${escapeHtml(item.mediaUrl || "")}"><button class="button small" type="button" data-upload-target="${mediaId}">上傳</button></label>
+          <label class="wide"><span>外部作品連結</span><input data-work-field="externalUrl" data-index="${index}" value="${escapeHtml(item.externalUrl || "")}"></label>
+          <label class="checkbox-row wide"><input type="checkbox" data-work-field="visible" data-index="${index}" ${item.visible !== false ? "checked" : ""}><span>公開顯示</span></label>
+        </div>
+      </article>
+    `;
+  }
+
   function renderWorks() {
     const holder = $("#worksEditor");
-    holder.innerHTML = (state.works || []).map((item, index) => {
-      const coverId = `workCover${index}`;
-      const mediaId = `workMedia${index}`;
+    ensureWorkIds();
+    const works = state.works || [];
+    const categories = getWorkCategories();
+    const toolbar = `
+      <div class="work-groups-toolbar">
+        <button class="button small" type="button" data-work-groups="expand">全部展開</button>
+        <button class="button small" type="button" data-work-groups="collapse">全部收合</button>
+      </div>
+    `;
+    const groups = categories.map(category => {
+      const items = works
+        .map((item, index) => ({ item, index }))
+        .filter(({ item }) => (item.category || "未分類") === category);
+      const isCollapsed = collapsedWorkGroups.has(category);
       return `
-        <article class="editor-card" data-work-index="${index}">
-          <div class="editor-card-head">
-            <strong>${escapeHtml(item.title || `作品 ${index + 1}`)}</strong>
-            <div class="card-actions"><button class="button danger small" type="button" data-remove-work="${index}">刪除</button></div>
+        <section class="work-group ${isCollapsed ? "is-collapsed" : ""}" data-work-group="${escapeHtml(category)}">
+          <button class="work-group-toggle" type="button" data-work-group-toggle="${escapeHtml(category)}" aria-expanded="${String(!isCollapsed)}">
+            <span class="work-group-title">${escapeHtml(category)}</span>
+            <span class="work-group-meta">${items.length} 件作品</span>
+            <span class="work-group-chevron" aria-hidden="true">⌄</span>
+          </button>
+          <div class="work-group-body">
+            ${items.map(({ item, index }) => renderWorkCard(item, index)).join("") || `<div class="work-group-empty">此分類目前沒有作品</div>`}
           </div>
-          <div class="editor-grid">
-            <label><span>作品名稱</span><input data-work-field="title" data-index="${index}" value="${escapeHtml(item.title || "")}"></label>
-            <label><span>作者</span><input data-work-field="artist" data-index="${index}" value="${escapeHtml(item.artist || "XIAXGUANG")}"></label>
-            <label><span>分類</span><select data-work-field="category" data-index="${index}">${["原創","翻唱","混音","編曲"].map(c => `<option ${item.category === c ? "selected" : ""}>${c}</option>`).join("")}</select></label>
-            <label><span>內容類型</span><select data-work-field="type" data-index="${index}">${["audio","video","link"].map(type => `<option value="${type}" ${item.type === type ? "selected" : ""}>${type}</option>`).join("")}</select></label>
-            <label class="wide"><span>標籤（逗號分隔）</span><input data-work-field="tags" data-index="${index}" value="${escapeHtml((item.tags || []).join(", "))}"></label>
-            <label class="wide with-upload"><span>封面圖片網址或路徑</span><input id="${coverId}" data-work-field="coverUrl" data-index="${index}" value="${escapeHtml(item.coverUrl || "")}"><button class="button small" type="button" data-upload-target="${coverId}">上傳</button></label>
-            <label class="wide with-upload"><span>音檔或影片網址</span><input id="${mediaId}" data-work-field="mediaUrl" data-index="${index}" value="${escapeHtml(item.mediaUrl || "")}"><button class="button small" type="button" data-upload-target="${mediaId}">上傳</button></label>
-            <label class="wide"><span>外部作品連結</span><input data-work-field="externalUrl" data-index="${index}" value="${escapeHtml(item.externalUrl || "")}"></label>
-            <label class="checkbox-row wide"><input type="checkbox" data-work-field="visible" data-index="${index}" ${item.visible !== false ? "checked" : ""}><span>公開顯示</span></label>
-          </div>
-        </article>
+        </section>
       `;
     }).join("");
+    holder.innerHTML = `${toolbar}${groups}`;
   }
 
   function readWorks() {
@@ -336,7 +390,7 @@
       const index = Number(card.dataset.workIndex);
       const read = field => $(`[data-work-field="${field}"][data-index="${index}"]`);
       return {
-        id: state.works[index]?.id || `work-${Date.now()}-${index}`,
+        id: card.dataset.workId || state.works[index]?.id || `work-${Date.now()}-${index}`,
         title: read("title").value.trim(),
         artist: read("artist").value.trim(),
         category: read("category").value,
@@ -577,6 +631,45 @@
         return;
       }
 
+      const removeWorkById = target.closest("[data-remove-work-id]");
+      if (removeWorkById) {
+        const workId = removeWorkById.dataset.removeWorkId || "";
+        readWorks();
+        const index = state.works.findIndex(item => String(item.id || "") === workId);
+        if (index >= 0) state.works.splice(index, 1);
+        renderWorks();
+        markDirty();
+        return;
+      }
+
+      const workGroupToggle = target.closest("[data-work-group-toggle]");
+      if (workGroupToggle) {
+        const category = workGroupToggle.dataset.workGroupToggle || "";
+        const group = workGroupToggle.closest("[data-work-group]");
+        const nextCollapsed = !group.classList.contains("is-collapsed");
+        group.classList.toggle("is-collapsed", nextCollapsed);
+        workGroupToggle.setAttribute("aria-expanded", String(!nextCollapsed));
+        if (nextCollapsed) {
+          collapsedWorkGroups.add(category);
+        } else {
+          collapsedWorkGroups.delete(category);
+        }
+        return;
+      }
+
+      const workGroupsAction = target.closest("[data-work-groups]");
+      if (workGroupsAction) {
+        readWorks();
+        const categories = getWorkCategories();
+        if (workGroupsAction.dataset.workGroups === "collapse") {
+          categories.forEach(category => collapsedWorkGroups.add(category));
+        } else {
+          collapsedWorkGroups.clear();
+        }
+        renderWorks();
+        return;
+      }
+
       const removeBeat = target.closest("[data-remove-beat]");
       if (removeBeat) {
         state.beats.splice(Number(removeBeat.dataset.removeBeat), 1);
@@ -617,6 +710,14 @@
       if (event.target.closest(".admin-panel")) markDirty();
     });
     document.addEventListener("change", event => {
+      if (event.target.matches('[data-work-field="category"]')) {
+        const nextCategory = event.target.value;
+        readWorks();
+        collapsedWorkGroups.delete(nextCategory);
+        renderWorks();
+        markDirty();
+        return;
+      }
       if (event.target.closest(".admin-panel")) markDirty();
     });
   }
@@ -643,6 +744,7 @@
         tags: [],
         visible: true
       });
+      collapsedWorkGroups.delete("原創");
       renderWorks();
       markDirty();
     });

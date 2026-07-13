@@ -439,6 +439,7 @@
         </article>
       `;
     }).join("");
+    observeReveal(grid);
   }
 
   function renderComparisons() {
@@ -715,8 +716,8 @@
     });
   }
 
-  function observeReveal() {
-    const nodes = $$(".reveal:not(.visible)");
+  function observeReveal(root = document) {
+    const nodes = $$(".reveal:not(.visible)", root);
     if (!("IntersectionObserver" in window)) {
       nodes.forEach(node => node.classList.add("visible"));
       return;
