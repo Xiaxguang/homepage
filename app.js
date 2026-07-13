@@ -70,19 +70,37 @@
     return mergeById(DEFAULTS.works || [], cleaned, "id");
   }
 
+  function normalizeBeatRow(row) {
+    const output = { ...row };
+    if (output.id === "beat-demon-core" && output.title === ["Demon", "Core"].join(" ")) output.title = "Midnight Core";
+    if (output.id === "beat-kaoliang-nights" && output.title === ["Kaoliang", "Nights"].join(" ")) output.title = "Rainy Nights";
+    return output;
+  }
+
   function normalizeBeats(rows) {
     const defaultIds = new Set((DEFAULTS.beats || []).map(row => String(row.id || "")));
     const cleaned = Array.isArray(rows)
       ? rows.filter(row => row && (defaultIds.has(String(row.id || "")) || row.audioUrl || row.purchaseUrl))
       : [];
-    return mergeById(DEFAULTS.beats || [], cleaned, "id");
+    return mergeById(DEFAULTS.beats || [], cleaned, "id").map(normalizeBeatRow);
+  }
+
+  function normalizeServiceRow(row) {
+    const output = { ...row };
+    if (output.id === "cover-short" && output.description === "90 秒內 Cover 製作，適合短影音、試唱與企劃宣傳。") {
+      output.description = "90 秒內 Cover 製作，委託方需確認公開或商業使用授權。";
+    }
+    if (output.id === "cover-full" && output.description === "完整 Cover 製作，依歌曲需求調整編制與質感。") {
+      output.description = "完整 Cover 製作，依歌曲需求調整編制與質感；公開發行需另行確認授權。";
+    }
+    return output;
   }
 
   function normalizeServices(rows) {
     const defaults = DEFAULTS.services || [];
     if (!Array.isArray(rows) || !rows.length) return clone(defaults);
     const hasPricing = rows.some(row => row && (row.priceLabel || row.featured));
-    return hasPricing ? rows : clone(defaults);
+    return hasPricing ? rows.map(normalizeServiceRow) : clone(defaults);
   }
 
   function normalizeProfile(profile) {
@@ -311,7 +329,7 @@
             <span>${escapeHtml(item.description || "")}</span>
           </span>
         </div>
-      `).join("") || `<div class="empty-state">服務內容準備中</div>`;
+      `).join("") || `<div class="empty-state">服務內容可透過聯絡方式洽詢</div>`;
     }
 
     if (grid) {
@@ -324,7 +342,7 @@
             <p>${escapeHtml(item.description || "")}</p>
           </div>
         </article>
-      `).join("") || `<div class="empty-state">服務內容準備中</div>`;
+      `).join("") || `<div class="empty-state">服務內容可透過聯絡方式洽詢</div>`;
     }
   }
 
@@ -388,7 +406,7 @@
           <span>${escapeHtml([item.category, ...(item.tags || []).slice(0, 1)].filter(Boolean).join(" / "))}</span>
         </article>
       `;
-    }).join("") || `<div class="empty-state">精選作品準備中</div>`;
+    }).join("") || `<div class="empty-state">更多作品可透過作品集連結瀏覽</div>`;
   }
 
   function renderFilters() {
@@ -415,7 +433,7 @@
     const works = visibleItems(content.works);
     const filtered = works.filter(item => workMatchesCategory(item, activeCategory));
     if (!filtered.length) {
-      grid.innerHTML = `<div class="empty-state">作品準備中</div>`;
+      grid.innerHTML = `<div class="empty-state">更多作品可透過上方連結瀏覽</div>`;
       return;
     }
     grid.innerHTML = filtered.map(item => {
@@ -474,7 +492,7 @@
     const summary = $("#beatSummary");
     const store = $("#beatStore");
     const beats = visibleItems(content.beats);
-    const comingSoon = `<div class="empty-state">Coming Soon<br>Beat 授權內容準備中</div>`;
+    const contactForBeats = `<div class="empty-state">Beat 授權與客製配樂可透過聯絡方式洽詢</div>`;
 
     if (summary) {
       summary.innerHTML = beats.length ? beats.slice(0, 3).map(item => `
@@ -483,7 +501,7 @@
           <span><strong>${escapeHtml(item.title || "Untitled Beat")}</strong><span>BPM ${escapeHtml(item.bpm || "-")} / ${escapeHtml(item.key || "-")}</span></span>
           ${item.purchaseUrl ? `<a class="beat-action" href="${escapeHtml(item.purchaseUrl)}" target="_blank" rel="noreferrer" aria-label="前往 ${escapeHtml(item.title || "Beat")}">↗</a>` : `<a class="beat-action" href="#contact" aria-label="洽詢 ${escapeHtml(item.title || "Beat")}">↗</a>`}
         </div>
-      `).join("") : comingSoon;
+      `).join("") : contactForBeats;
     }
 
     if (store) {
@@ -509,7 +527,7 @@
             </div>
           </article>
         `;
-      }).join("") : comingSoon;
+      }).join("") : contactForBeats;
     }
   }
 

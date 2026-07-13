@@ -81,19 +81,37 @@
     return mergeById(DEFAULTS.works || [], cleaned, "id");
   }
 
+  function normalizeBeatRow(row) {
+    const output = { ...row };
+    if (output.id === "beat-demon-core" && output.title === ["Demon", "Core"].join(" ")) output.title = "Midnight Core";
+    if (output.id === "beat-kaoliang-nights" && output.title === ["Kaoliang", "Nights"].join(" ")) output.title = "Rainy Nights";
+    return output;
+  }
+
   function normalizeBeats(rows) {
     const defaultIds = new Set((DEFAULTS.beats || []).map(row => String(row.id || "")));
     const cleaned = Array.isArray(rows)
       ? rows.filter(row => row && (defaultIds.has(String(row.id || "")) || row.audioUrl || row.purchaseUrl))
       : [];
-    return mergeById(DEFAULTS.beats || [], cleaned, "id");
+    return mergeById(DEFAULTS.beats || [], cleaned, "id").map(normalizeBeatRow);
+  }
+
+  function normalizeServiceRow(row) {
+    const output = { ...row };
+    if (output.id === "cover-short" && output.description === "90 秒內 Cover 製作，適合短影音、試唱與企劃宣傳。") {
+      output.description = "90 秒內 Cover 製作，委託方需確認公開或商業使用授權。";
+    }
+    if (output.id === "cover-full" && output.description === "完整 Cover 製作，依歌曲需求調整編制與質感。") {
+      output.description = "完整 Cover 製作，依歌曲需求調整編制與質感；公開發行需另行確認授權。";
+    }
+    return output;
   }
 
   function normalizeServices(rows) {
     const defaults = DEFAULTS.services || [];
     if (!Array.isArray(rows) || !rows.length) return clone(defaults);
     const hasPricing = rows.some(row => row && (row.priceLabel || row.featured));
-    return hasPricing ? rows : clone(defaults);
+    return hasPricing ? rows.map(normalizeServiceRow) : clone(defaults);
   }
 
   function normalizeProfile(profile) {

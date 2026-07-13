@@ -74,13 +74,13 @@ window.DEFAULT_CONTENT = {
       id: "cover-short",
       title: "Cover 短版",
       priceLabel: "NT$ 4,000",
-      description: "90 秒內 Cover 製作，適合短影音、試唱與企劃宣傳。"
+      description: "90 秒內 Cover 製作，委託方需確認公開或商業使用授權。"
     },
     {
       id: "cover-full",
       title: "Cover 全曲",
       priceLabel: "NT$ 6,000",
-      description: "完整 Cover 製作，依歌曲需求調整編制與質感。"
+      description: "完整 Cover 製作，依歌曲需求調整編制與質感；公開發行需另行確認授權。"
     },
     {
       id: "original-package",
@@ -124,7 +124,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "beat-demon-core",
-      title: "Demon Core",
+      title: "Midnight Core",
       coverUrl: "assets/media/cover-demon-core.webp",
       audioUrl: "assets/audio/demon-core.mp3",
       bpm: 144,
@@ -160,7 +160,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "beat-kaoliang-nights",
-      title: "Kaoliang Nights",
+      title: "Rainy Nights",
       coverUrl: "assets/media/cover-kaoliang-nights.webp",
       audioUrl: "assets/audio/kaoliang-nights.mp3",
       bpm: 144,
