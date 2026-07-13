@@ -1027,6 +1027,95 @@ img { max-width: 100%; display: block; }
   font-weight: 800;
 }
 
+.commerce-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.commerce-panel {
+  min-height: 260px;
+  padding: 24px;
+}
+
+.commerce-panel h3 {
+  margin: 10px 0 18px;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.commerce-panel p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.commerce-list,
+.commerce-service-list,
+.commerce-flow {
+  display: grid;
+  gap: 10px;
+}
+
+.commerce-row,
+.commerce-service {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.commerce-row:last-child,
+.commerce-service:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.commerce-row span,
+.commerce-service span,
+.commerce-flow span,
+.commerce-note {
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+.commerce-row strong,
+.commerce-service strong {
+  color: #eaf4ef;
+  overflow-wrap: anywhere;
+}
+
+.commerce-row a {
+  color: var(--accent);
+}
+
+.commerce-service {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.commerce-service strong {
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.commerce-note {
+  margin-top: 14px;
+}
+
+.commerce-flow {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.commerce-flow li {
+  padding-left: 2px;
+}
+
+.commerce-flow strong {
+  display: block;
+  color: #eaf4ef;
+}
+
 .beat-store-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1468,6 +1557,7 @@ img { max-width: 100%; display: block; }
   .dashboard,
   .comparison-grid,
   .service-grid,
+  .commerce-grid,
   .about-process,
   .contact-card,
   .site-footer {
@@ -1568,6 +1658,7 @@ img { max-width: 100%; display: block; }
   }
   .works-grid,
   .beat-store-grid,
+  .commerce-grid,
   .compare-tracks,
   .process-steps {
     grid-template-columns: 1fr;

@@ -11,6 +11,7 @@
     works: "完整作品集",
     comparison: "混音前後對比",
     services: "完整服務區",
+    commerce: "商店與交易說明",
     beats: "Beats 商店",
     about: "關於我與流程",
     contact: "聯絡區"
@@ -174,6 +175,7 @@
     $("#heroLine").value = p.heroLine || "";
     $("#heroDescription").value = p.heroDescription || "";
     $("#profileEmail").value = p.email || "";
+    $("#profilePhone").value = p.phone || "";
     $("#profileInstagram").value = p.instagram || "";
     $("#profileLine").value = p.lineId || "";
     $("#profileDiscord").value = p.discord || "";
@@ -195,6 +197,7 @@
       heroLine: $("#heroLine").value.trim(),
       heroDescription: $("#heroDescription").value.trim(),
       email: $("#profileEmail").value.trim(),
+      phone: $("#profilePhone").value.trim(),
       instagram: $("#profileInstagram").value.trim().replace(/^@/, ""),
       lineId: $("#profileLine").value.trim(),
       discord: $("#profileDiscord").value.trim(),

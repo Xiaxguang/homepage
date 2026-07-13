@@ -13,9 +13,10 @@ window.DEFAULT_CONTENT = {
     { id: "works", visible: true, order: 3 },
     { id: "comparison", visible: true, order: 4 },
     { id: "services", visible: true, order: 5 },
-    { id: "beats", visible: true, order: 6 },
-    { id: "about", visible: true, order: 7 },
-    { id: "contact", visible: true, order: 8 }
+    { id: "commerce", visible: true, order: 6 },
+    { id: "beats", visible: true, order: 7 },
+    { id: "about", visible: true, order: 8 },
+    { id: "contact", visible: true, order: 9 }
   ],
   profile: {
     name: "XIAXGUANG",
@@ -27,6 +28,7 @@ window.DEFAULT_CONTENT = {
     heroDescription: "用聲音打造情緒，用音樂傳遞故事。專業、用心、有效率，讓你的作品更上一層樓。",
     location: "Taiwan, Taoyuan",
     email: "a26926291@gmail.com",
+    phone: "0956737181",
     aboutTitle: "我是 XIAXGUANG，也叫阿光。",
     aboutBody: "音樂製作人、聲音設計師。從混音、編曲到人聲錄音，專注於把作品品質與情緒表達推進到更完整的位置。合作過多位歌手、YouTuber 與創作者，期待與你一起創造更多可能。",
     instagram: "xiaxguang",

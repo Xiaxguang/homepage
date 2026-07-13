@@ -164,6 +164,10 @@
     return `mailto:${email}?subject=${subject}`;
   }
 
+  function telUrl(phone) {
+    return `tel:${String(phone || "").replace(/[^\d+]/g, "")}`;
+  }
+
   function visibleItems(rows) {
     return (rows || []).filter(item => item && item.visible !== false);
   }
@@ -196,6 +200,7 @@
     setText("aboutTitle", p.aboutTitle || "我是 XIAXGUANG，也叫阿光。");
     setText("aboutBody", p.aboutBody || "");
     setText("footerEmail", p.email || "");
+    setText("footerPhone", p.phone || "");
     setText("footerLocation", p.location || "");
     document.title = "XIAXGUANG｜MUSIC PRODUCER";
 
@@ -240,6 +245,7 @@
     const p = content.profile || {};
     const rows = [];
     if (p.email) rows.push(`<a class="button primary" href="${escapeHtml(mailUrl(p.email))}">Email 合作洽詢</a>`);
+    if (p.phone) rows.push(`<a class="button secondary" href="${escapeHtml(telUrl(p.phone))}">電話洽詢</a>`);
     if (p.instagram) rows.push(`<a class="button secondary" href="${escapeHtml(instagramUrl(p.instagram))}" target="_blank" rel="noreferrer">Instagram</a>`);
     if (p.lineId) rows.push(`<a class="button secondary" href="${escapeHtml(lineUrl(p.lineId))}" target="_blank" rel="noreferrer">LINE</a>`);
     if (p.discord) {
@@ -296,6 +302,46 @@
           </div>
         </article>
       `).join("") || `<div class="empty-state">服務內容準備中</div>`;
+    }
+  }
+
+  function renderCommerceInfo() {
+    const p = content.profile || {};
+    const contacts = $("#commerceContactList");
+    const services = $("#commerceServiceList");
+    const row = (label, value, isHtml = false) => `
+      <div class="commerce-row">
+        <span>${escapeHtml(label)}</span>
+        <strong>${isHtml ? value : escapeHtml(value)}</strong>
+      </div>
+    `;
+
+    if (contacts) {
+      const rows = [
+        row("商店名稱", "XIAXGUANG Music Producer"),
+        row("服務提供者", `${p.name || "XIAXGUANG"}${p.alias ? `（${p.alias}）` : ""}`),
+        row("服務內容", "音樂製作、作詞、作曲、編曲、混音、母帶、Cover 製作與客製音樂製作"),
+        row("所在地", p.location || "Taiwan, Taoyuan")
+      ];
+      if (p.email) rows.push(row("Email", `<a href="${escapeHtml(mailUrl(p.email))}">${escapeHtml(p.email)}</a>`, true));
+      if (p.phone) rows.push(row("電話", `<a href="${escapeHtml(telUrl(p.phone))}">${escapeHtml(p.phone)}</a>`, true));
+      if (p.lineId) rows.push(row("LINE", `<a href="${escapeHtml(lineUrl(p.lineId))}" target="_blank" rel="noreferrer">ID：${escapeHtml(p.lineId)}</a>`, true));
+      if (p.discord) {
+        const discord = p.discordUrl
+          ? `<a href="${escapeHtml(p.discordUrl)}" target="_blank" rel="noreferrer">${escapeHtml(p.discord)}</a>`
+          : escapeHtml(p.discord);
+        rows.push(row("Discord", discord, true));
+      }
+      contacts.innerHTML = rows.join("");
+    }
+
+    if (services) {
+      services.innerHTML = visibleItems(content.services).map(item => `
+        <div class="commerce-service">
+          <span>${escapeHtml(item.title || "")}</span>
+          <strong>${escapeHtml(item.priceLabel || "另行報價")}</strong>
+        </div>
+      `).join("");
     }
   }
 
@@ -670,6 +716,7 @@
     renderHeroTags();
     setupPlayableWorks();
     renderServices();
+    renderCommerceInfo();
     renderFeaturedWorks();
     renderFilters();
     renderWorks();
