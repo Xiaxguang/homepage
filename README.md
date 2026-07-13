@@ -29,6 +29,19 @@
 - `assets/media/beat-night-drive.webp`
 - `assets/media/cover-spectrum.webp`
 - `assets/media/studio-notes.webp`
+- `assets/media/cover-neon-velocity.webp`
+- `assets/media/cover-demon-core.webp`
+- `assets/media/cover-astral-gate.webp`
+- `assets/media/cover-echo-rift.webp`
+- `assets/media/cover-kaoliang-nights.webp`
+
+音樂作品放在：
+
+- `assets/audio/neon-velocity.mp3`
+- `assets/audio/demon-core.mp3`
+- `assets/audio/astral-gate.mp3`
+- `assets/audio/echo-rift.mp3`
+- `assets/audio/kaoliang-nights.mp3`
 
 所有網站路徑皆使用相對路徑，適合專案型 GitHub Pages。
 

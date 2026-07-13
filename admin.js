@@ -4,6 +4,7 @@
   const CONFIG = window.PORTFOLIO_CONFIG || {};
   const DEFAULTS = window.DEFAULT_CONTENT || {};
   const STORAGE_KEY = "xiaxguang_portfolio_content_v2";
+  const LEGACY_WORK_IDS = new Set(["demo-original", "demo-cover", "demo-arrangement", "demo-mix"]);
   const SECTION_LABELS = {
     hero: "Hero 首頁",
     dashboard: "首頁三欄摘要",
@@ -72,6 +73,11 @@
     return merged;
   }
 
+  function normalizeWorks(rows) {
+    const cleaned = Array.isArray(rows) ? rows.filter(row => row && !LEGACY_WORK_IDS.has(String(row.id || ""))) : [];
+    return mergeById(DEFAULTS.works || [], cleaned, "id");
+  }
+
   function normalizeState(input) {
     const merged = deepMerge(clone(DEFAULTS), input || {});
     merged.profile = { ...(DEFAULTS.profile || {}), ...(merged.profile || {}) };
@@ -81,7 +87,7 @@
       .sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
     merged.process = Array.isArray(merged.process) && merged.process.length ? merged.process : clone(DEFAULTS.process || []);
     merged.beats = Array.isArray(merged.beats) ? merged.beats : clone(DEFAULTS.beats || []);
-    merged.works = Array.isArray(merged.works) ? merged.works : [];
+    merged.works = normalizeWorks(merged.works);
     merged.services = Array.isArray(merged.services) ? merged.services : [];
     merged.comparisons = Array.isArray(merged.comparisons) ? merged.comparisons : [];
     merged.categories = Array.isArray(merged.categories) && merged.categories.length ? merged.categories : clone(DEFAULTS.categories || ["全部"]);
