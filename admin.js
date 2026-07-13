@@ -86,6 +86,13 @@
     return mergeById(DEFAULTS.beats || [], cleaned, "id");
   }
 
+  function normalizeServices(rows) {
+    const defaults = DEFAULTS.services || [];
+    if (!Array.isArray(rows) || !rows.length) return clone(defaults);
+    const hasPricing = rows.some(row => row && (row.priceLabel || row.featured));
+    return hasPricing ? rows : clone(defaults);
+  }
+
   function normalizeState(input) {
     const merged = deepMerge(clone(DEFAULTS), input || {});
     merged.profile = { ...(DEFAULTS.profile || {}), ...(merged.profile || {}) };
@@ -96,7 +103,7 @@
     merged.process = Array.isArray(merged.process) && merged.process.length ? merged.process : clone(DEFAULTS.process || []);
     merged.beats = normalizeBeats(merged.beats);
     merged.works = normalizeWorks(merged.works);
-    merged.services = Array.isArray(merged.services) ? merged.services : [];
+    merged.services = normalizeServices(merged.services);
     merged.comparisons = Array.isArray(merged.comparisons) ? merged.comparisons : [];
     merged.categories = Array.isArray(merged.categories) && merged.categories.length ? merged.categories : clone(DEFAULTS.categories || ["全部"]);
     merged.profile.name = "XIAXGUANG";
@@ -160,6 +167,7 @@
     $("#profileEmail").value = p.email || "";
     $("#profileInstagram").value = p.instagram || "";
     $("#profileLine").value = p.lineId || "";
+    $("#profileDiscord").value = p.discord || "";
     $("#profileYoutube").value = p.youtube || "";
     $("#aboutTitle").value = p.aboutTitle || "";
     $("#aboutBody").value = p.aboutBody || "";
@@ -179,6 +187,7 @@
       email: $("#profileEmail").value.trim(),
       instagram: $("#profileInstagram").value.trim().replace(/^@/, ""),
       lineId: $("#profileLine").value.trim(),
+      discord: $("#profileDiscord").value.trim(),
       youtube: $("#profileYoutube").value.trim(),
       aboutTitle: $("#aboutTitle").value.trim(),
       aboutBody: $("#aboutBody").value.trim()
@@ -253,14 +262,16 @@
   function renderServices() {
     const holder = $("#servicesEditor");
     holder.innerHTML = (state.services || []).map((item, index) => `
-      <article class="editor-card" data-service-index="${index}">
+      <article class="editor-card" data-service-index="${index}" data-service-id="${escapeHtml(item.id || "")}">
         <div class="editor-card-head">
           <strong>服務 ${index + 1}</strong>
           <div class="card-actions"><button class="button danger small" type="button" data-remove-service="${index}">刪除</button></div>
         </div>
         <div class="editor-grid">
           <label><span>名稱</span><input data-service-title="${index}" value="${escapeHtml(item.title || "")}"></label>
+          <label><span>價格</span><input data-service-price="${index}" value="${escapeHtml(item.priceLabel || "")}"></label>
           <label class="wide"><span>介紹</span><textarea rows="3" data-service-description="${index}">${escapeHtml(item.description || "")}</textarea></label>
+          <label class="checkbox-row wide"><input type="checkbox" data-service-featured="${index}" ${item.featured ? "checked" : ""}><span>醒目方案卡</span></label>
         </div>
       </article>
     `).join("");
@@ -270,8 +281,11 @@
     state.services = $$("[data-service-index]").map(card => {
       const index = Number(card.dataset.serviceIndex);
       return {
+        id: card.dataset.serviceId || `service-${index + 1}`,
         title: $(`[data-service-title="${index}"]`).value.trim(),
-        description: $(`[data-service-description="${index}"]`).value.trim()
+        priceLabel: $(`[data-service-price="${index}"]`).value.trim(),
+        description: $(`[data-service-description="${index}"]`).value.trim(),
+        featured: $(`[data-service-featured="${index}"]`).checked
       };
     });
   }
@@ -596,7 +610,7 @@
   function bindCreateButtons() {
     $("#addService").addEventListener("click", () => {
       readServices();
-      state.services.push({ title: "新服務", description: "" });
+      state.services.push({ id: `service-${Date.now()}`, title: "新服務", priceLabel: "", description: "", featured: false });
       renderServices();
       markDirty();
     });

@@ -78,6 +78,13 @@
     return mergeById(DEFAULTS.beats || [], cleaned, "id");
   }
 
+  function normalizeServices(rows) {
+    const defaults = DEFAULTS.services || [];
+    if (!Array.isArray(rows) || !rows.length) return clone(defaults);
+    const hasPricing = rows.some(row => row && (row.priceLabel || row.featured));
+    return hasPricing ? rows : clone(defaults);
+  }
+
   function normalizeContent(input) {
     const merged = deepMerge(clone(DEFAULTS), input || {});
     merged.profile = { ...(DEFAULTS.profile || {}), ...(merged.profile || {}) };
@@ -88,7 +95,7 @@
     merged.process = Array.isArray(merged.process) && merged.process.length ? merged.process : clone(DEFAULTS.process || []);
     merged.beats = normalizeBeats(merged.beats);
     merged.works = normalizeWorks(merged.works);
-    merged.services = Array.isArray(merged.services) ? merged.services : [];
+    merged.services = normalizeServices(merged.services);
     merged.comparisons = Array.isArray(merged.comparisons) ? merged.comparisons : [];
     merged.categories = Array.isArray(merged.categories) && merged.categories.length ? merged.categories : clone(DEFAULTS.categories || ["全部"]);
     if (!merged.categories.includes("全部")) merged.categories.unshift("全部");
@@ -212,8 +219,12 @@
     if (p.instagram) links.push({ label: withText ? "Instagram" : "IG", href: instagramUrl(p.instagram) });
     if (p.lineId) links.push({ label: withText ? "LINE" : "LINE", href: lineUrl(p.lineId) });
     if (p.email) links.push({ label: withText ? "Email" : "MAIL", href: mailUrl(p.email) });
+    if (p.discord) links.push({ label: withText ? `Discord: ${p.discord}` : "DC", textOnly: true });
     if (p.youtube) links.push({ label: withText ? "YouTube" : "YT", href: p.youtube });
-    return links.map(link => `<a href="${escapeHtml(link.href)}" target="${link.href.startsWith("mailto:") ? "_self" : "_blank"}" rel="noreferrer">${escapeHtml(link.label)}</a>`).join("");
+    return links.map(link => link.textOnly
+      ? `<span title="${escapeHtml(link.label)}">${escapeHtml(link.label)}</span>`
+      : `<a href="${escapeHtml(link.href)}" target="${link.href.startsWith("mailto:") ? "_self" : "_blank"}" rel="noreferrer">${escapeHtml(link.label)}</a>`
+    ).join("");
   }
 
   function contactLinksHtml() {
@@ -222,6 +233,7 @@
     if (p.email) rows.push(`<a class="button primary" href="${escapeHtml(mailUrl(p.email))}">Email 合作洽詢</a>`);
     if (p.instagram) rows.push(`<a class="button secondary" href="${escapeHtml(instagramUrl(p.instagram))}" target="_blank" rel="noreferrer">Instagram</a>`);
     if (p.lineId) rows.push(`<a class="button secondary" href="${escapeHtml(lineUrl(p.lineId))}" target="_blank" rel="noreferrer">LINE</a>`);
+    if (p.discord) rows.push(`<span class="button secondary static-contact">DC: ${escapeHtml(p.discord)}</span>`);
     return rows.join("");
   }
 
@@ -251,17 +263,21 @@
       summary.innerHTML = services.slice(0, 3).map(item => `
         <div class="service-row">
           <span class="service-icon" aria-hidden="true"></span>
-          <span><strong>${escapeHtml(item.title || "")}</strong><span>${escapeHtml(item.description || "")}</span></span>
+          <span>
+            <strong>${escapeHtml(item.title || "")}${item.priceLabel ? `<em>${escapeHtml(item.priceLabel)}</em>` : ""}</strong>
+            <span>${escapeHtml(item.description || "")}</span>
+          </span>
         </div>
       `).join("") || `<div class="empty-state">服務內容準備中</div>`;
     }
 
     if (grid) {
       grid.innerHTML = services.map((item, index) => `
-        <article class="service-card reveal">
+        <article class="service-card ${item.featured ? "is-featured" : ""} reveal">
           <small>${String(index + 1).padStart(2, "0")}</small>
           <div>
             <h3>${escapeHtml(item.title || "")}</h3>
+            ${item.priceLabel ? `<strong class="service-price">${escapeHtml(item.priceLabel)}</strong>` : ""}
             <p>${escapeHtml(item.description || "")}</p>
           </div>
         </article>

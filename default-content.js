@@ -31,22 +31,60 @@ window.DEFAULT_CONTENT = {
     aboutBody: "音樂製作人、聲音設計師。從混音、編曲到人聲錄音，專注於把作品品質與情緒表達推進到更完整的位置。合作過多位歌手、YouTuber 與創作者，期待與你一起創造更多可能。",
     instagram: "xiaxguang",
     lineId: "bikabikahikari",
+    discord: "xiaxguang",
     youtube: "",
     heroCharacter: "assets/characters/mascot-seated.png",
     aboutCharacter: "assets/characters/mascot-crossed.png"
   },
   services: [
     {
-      title: "混音製作",
-      description: "專業混音處理，讓你的聲音更有層次與力量。"
+      id: "lyrics",
+      title: "作詞",
+      priceLabel: "NT$ 6,000",
+      description: "依照主題、情緒與演唱語感打造歌詞。"
     },
     {
-      title: "編曲配樂",
-      description: "量身打造編曲，從 0 到 1 完成你的音樂想像。"
+      id: "composition",
+      title: "作曲",
+      priceLabel: "NT$ 8,000",
+      description: "完成旋律與歌曲主體，建立清楚的音樂輪廓。"
     },
     {
-      title: "宅錄人聲",
-      description: "專業錄音設備，提供乾淨人聲錄製服務。"
+      id: "arrangement",
+      title: "編曲",
+      priceLabel: "NT$ 15,000",
+      description: "從節奏、和聲到音色設計，完整鋪陳歌曲氛圍。"
+    },
+    {
+      id: "mixing",
+      title: "混音",
+      priceLabel: "NT$ 4,500",
+      description: "處理人聲、樂器平衡、空間與動態，讓作品更完整。"
+    },
+    {
+      id: "mastering",
+      title: "母帶",
+      priceLabel: "NT$ 3,000",
+      description: "整理整體響度、頻率與播放一致性，適合正式發布。"
+    },
+    {
+      id: "cover-short",
+      title: "Cover 短版",
+      priceLabel: "NT$ 4,000",
+      description: "90 秒內 Cover 製作，適合短影音、試唱與企劃宣傳。"
+    },
+    {
+      id: "cover-full",
+      title: "Cover 全曲",
+      priceLabel: "NT$ 6,000",
+      description: "完整 Cover 製作，依歌曲需求調整編制與質感。"
+    },
+    {
+      id: "original-package",
+      title: "原創歌曲全包",
+      priceLabel: "NT$ 25,000",
+      description: "包含作詞、作曲、編曲、混音、母帶；依需求彈性調整方案，專屬打造你的音樂作品。",
+      featured: true
     }
   ],
   categories: ["全部", "原創", "翻唱", "混音", "編曲"],
