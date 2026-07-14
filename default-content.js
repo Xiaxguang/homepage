@@ -338,8 +338,8 @@ window.DEFAULT_CONTENT = {
       id: "mix-comparison-01",
       title: "Vocal Mixing",
       subtitle: "Before / After",
-      beforeUrl: "",
-      afterUrl: "",
+      beforeUrl: "assets/audio/Before.mp3",
+      afterUrl: "assets/audio/After.mp3",
       visible: true
     }
   ],
