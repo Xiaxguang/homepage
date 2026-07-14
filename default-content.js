@@ -91,7 +91,248 @@ window.DEFAULT_CONTENT = {
     }
   ],
   categories: ["全部", "原創", "翻唱", "混音", "編曲"],
-  works: [],
+  works: [
+    {
+      id: "original-01",
+      title: "原創作品 01",
+      category: "原創",
+      type: "audio",
+      mediaUrl: "assets/audio/Original/1.mp3",
+      coverUrl: "assets/image/1.webp",
+      tags: ["原創", "作曲", "製作"],
+      visible: true
+    },
+    {
+      id: "original-02",
+      title: "原創作品 02",
+      category: "原創",
+      type: "audio",
+      mediaUrl: "assets/audio/Original/2.mp3",
+      coverUrl: "assets/image/2.webp",
+      tags: ["原創", "編曲", "製作"],
+      visible: true
+    },
+    {
+      id: "original-03",
+      title: "原創作品 03",
+      category: "原創",
+      type: "audio",
+      mediaUrl: "assets/audio/Original/3.mp3",
+      coverUrl: "assets/image/3.webp",
+      tags: ["原創", "音樂製作"],
+      visible: true
+    },
+    {
+      id: "original-04",
+      title: "原創作品 04",
+      category: "原創",
+      type: "audio",
+      mediaUrl: "assets/audio/Original/4.mp3",
+      coverUrl: "assets/image/4.webp",
+      tags: ["原創", "作曲"],
+      visible: true
+    },
+    {
+      id: "original-05",
+      title: "原創作品 05",
+      category: "原創",
+      type: "audio",
+      mediaUrl: "assets/audio/Original/5.mp3",
+      coverUrl: "assets/image/5.webp",
+      tags: ["原創", "編曲"],
+      visible: true
+    },
+    {
+      id: "original-06",
+      title: "原創作品 06",
+      category: "原創",
+      type: "audio",
+      mediaUrl: "assets/audio/Original/6.mp3",
+      coverUrl: "assets/image/6.webp",
+      tags: ["原創", "錄音"],
+      visible: true
+    },
+    {
+      id: "cover-lemon",
+      title: "LEMON",
+      category: "翻唱",
+      type: "audio",
+      mediaUrl: "assets/audio/COVER/LEMON.mp3",
+      coverUrl: "assets/image/Cover1.webp",
+      tags: ["翻唱", "Cover"],
+      visible: true
+    },
+    {
+      id: "cover-overdose",
+      title: "OVERDOSE",
+      category: "翻唱",
+      type: "audio",
+      mediaUrl: "assets/audio/COVER/OVERDOSE.mp3",
+      coverUrl: "assets/image/Cover2.webp",
+      tags: ["翻唱", "Cover"],
+      visible: true
+    },
+    {
+      id: "cover-wait",
+      title: "XIAXGUANG - 我會等",
+      category: "翻唱",
+      type: "audio",
+      mediaUrl: "assets/audio/COVER/XIAXGUANG-我會等.mp3",
+      coverUrl: "assets/image/Cover3.webp",
+      tags: ["翻唱", "Cover"],
+      visible: true
+    },
+    {
+      id: "cover-evening-breeze",
+      title: "晚風告白",
+      category: "翻唱",
+      type: "audio",
+      mediaUrl: "assets/audio/COVER/晚風告白.mp3",
+      coverUrl: "assets/image/Cover4.webp",
+      tags: ["翻唱", "Cover"],
+      visible: true
+    },
+    {
+      id: "cover-dinner-song",
+      title: "晚餐歌",
+      category: "翻唱",
+      type: "audio",
+      mediaUrl: "assets/audio/COVER/晚餐歌.mp3",
+      coverUrl: "assets/image/Cover5.webp",
+      tags: ["翻唱", "Cover"],
+      visible: true
+    },
+    {
+      id: "cover-first-morning",
+      title: "第一個清晨",
+      category: "翻唱",
+      type: "audio",
+      mediaUrl: "assets/audio/COVER/第一個清晨.mp3",
+      coverUrl: "assets/image/Cover6.webp",
+      tags: ["翻唱", "Cover"],
+      visible: true
+    },
+    {
+      id: "mix-passing-by",
+      title: "他只是經過 MMM",
+      category: "混音",
+      type: "audio",
+      mediaUrl: "assets/audio/Mixing/他只是經過MMM.mp3",
+      coverUrl: "assets/image/Mixing1.webp",
+      tags: ["混音", "Vocal Mixing"],
+      visible: true
+    },
+    {
+      id: "mix-night-sun",
+      title: "夜晚的太陽",
+      category: "混音",
+      type: "audio",
+      mediaUrl: "assets/audio/Mixing/夜晚的太陽.mp3",
+      coverUrl: "assets/image/Mixing2.webp",
+      tags: ["混音", "後製"],
+      visible: true
+    },
+    {
+      id: "mix-think",
+      title: "想",
+      category: "混音",
+      type: "audio",
+      mediaUrl: "assets/audio/Mixing/想.mp3",
+      coverUrl: "assets/image/Mixing3.webp",
+      tags: ["混音", "人聲處理"],
+      visible: true
+    },
+    {
+      id: "mix-dizzy",
+      title: "暈了",
+      category: "混音",
+      type: "audio",
+      mediaUrl: "assets/audio/Mixing/暈了.mp3",
+      coverUrl: "assets/image/Mixing4.webp",
+      tags: ["混音", "後製"],
+      visible: true
+    },
+    {
+      id: "arrangement-also-want",
+      title: "其實我也想 - 阿月",
+      category: "編曲",
+      type: "audio",
+      mediaUrl: "assets/audio/Arrangement/其實我也想 - 阿月.mp3",
+      coverUrl: "assets/image/Arrangement1.webp",
+      tags: ["編曲", "Arrangement"],
+      visible: true
+    },
+    {
+      id: "arrangement-rui-mei",
+      title: "叡鎂鋂 KO Ver.2",
+      category: "編曲",
+      type: "audio",
+      mediaUrl: "assets/audio/Arrangement/叡鎂鋂KO Ver.2.mp3",
+      coverUrl: "assets/image/Arrangement2.webp",
+      tags: ["編曲", "Arrangement"],
+      visible: true
+    },
+    {
+      id: "arrangement-yuanshan",
+      title: "員山廣興堂",
+      category: "編曲",
+      type: "audio",
+      mediaUrl: "assets/audio/Arrangement/員山廣興堂.mp3",
+      coverUrl: "assets/image/Arrangement3.webp",
+      tags: ["編曲", "配樂"],
+      visible: true
+    },
+    {
+      id: "arrangement-half-for-you",
+      title: "留一半給你 MMM",
+      category: "編曲",
+      type: "audio",
+      mediaUrl: "assets/audio/Arrangement/留一半給你MMM.mp3",
+      coverUrl: "assets/image/Arrangement4.webp",
+      tags: ["編曲", "Arrangement"],
+      visible: true
+    },
+    {
+      id: "arrangement-friday",
+      title: "禮拜五的復興路 MMM",
+      category: "編曲",
+      type: "audio",
+      mediaUrl: "assets/audio/Arrangement/禮拜五的復興路MMM.mp3",
+      coverUrl: "assets/image/Arrangement5.webp",
+      tags: ["編曲", "Arrangement"],
+      visible: true
+    },
+    {
+      id: "arrangement-instrumental",
+      title: "純音樂",
+      category: "編曲",
+      type: "audio",
+      mediaUrl: "assets/audio/Arrangement/純音樂.mp3",
+      coverUrl: "assets/image/Arrangement6.webp",
+      tags: ["編曲", "純音樂"],
+      visible: true
+    },
+    {
+      id: "arrangement-tiger-lord",
+      title: "虎爺",
+      category: "編曲",
+      type: "audio",
+      mediaUrl: "assets/audio/Arrangement/虎爺.mp3",
+      coverUrl: "assets/image/Arrangement7.webp",
+      tags: ["編曲", "配樂"],
+      visible: true
+    },
+    {
+      id: "arrangement-my-fault",
+      title: "都是我不對 MMM",
+      category: "編曲",
+      type: "audio",
+      mediaUrl: "assets/audio/Arrangement/都是我不對 MMM.mp3",
+      coverUrl: "assets/image/Arrangement8.webp",
+      tags: ["編曲", "Arrangement"],
+      visible: true
+    }
+  ],
   comparisons: [
     {
       id: "mix-comparison-01",
