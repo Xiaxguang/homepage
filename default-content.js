@@ -4,8 +4,8 @@ window.DEFAULT_CONTENT = {
     accentCyan: "#58d9e8",
     accentViolet: "#8d6cff",
     heroBackgroundUrl: "assets/media/studio-hero.webp",
-    heroCharacter: "assets/characters/mascot-seated.png",
-    aboutCharacter: "assets/characters/mascot-crossed.png"
+    heroCharacter: "assets/characters/mascot-seated.webp",
+    aboutCharacter: "assets/characters/mascot-crossed.webp"
   },
   sections: [
     { id: "hero", visible: true, order: 1 },
@@ -36,8 +36,8 @@ window.DEFAULT_CONTENT = {
     discord: "Xiaxguang",
     discordUrl: "https://discord.com/users/577455290841038850",
     youtube: "",
-    heroCharacter: "assets/characters/mascot-seated.png",
-    aboutCharacter: "assets/characters/mascot-crossed.png"
+    heroCharacter: "assets/characters/mascot-seated.webp",
+    aboutCharacter: "assets/characters/mascot-crossed.webp"
   },
   services: [
     {
@@ -98,7 +98,7 @@ window.DEFAULT_CONTENT = {
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/1.mp3",
-      coverUrl: "assets/image/1.webp",
+      coverUrl: "assets/image/original-background-xiaxguang.webp",
       tags: ["原創", "作曲", "製作"],
       visible: true
     },
@@ -108,7 +108,7 @@ window.DEFAULT_CONTENT = {
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/2.mp3",
-      coverUrl: "assets/image/2.webp",
+      coverUrl: "assets/image/original-dont-pretend-xiaxguang.webp",
       tags: ["原創", "編曲", "製作"],
       visible: true
     },
@@ -118,7 +118,7 @@ window.DEFAULT_CONTENT = {
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/3.mp3",
-      coverUrl: "assets/image/3.webp",
+      coverUrl: "assets/image/original-mind-your-business-xiaxguang.webp",
       tags: ["原創", "音樂製作"],
       visible: true
     },
@@ -128,7 +128,7 @@ window.DEFAULT_CONTENT = {
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/4.mp3",
-      coverUrl: "assets/image/4.webp",
+      coverUrl: "assets/image/original-lost-girlfriend-xiaxguang.webp",
       tags: ["原創", "作曲"],
       visible: true
     },
@@ -138,7 +138,7 @@ window.DEFAULT_CONTENT = {
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/5.mp3",
-      coverUrl: "assets/image/5.webp",
+      coverUrl: "assets/image/original-leave-me-xiaxguang.webp",
       tags: ["原創", "編曲"],
       visible: true
     },
@@ -148,7 +148,7 @@ window.DEFAULT_CONTENT = {
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/6.mp3",
-      coverUrl: "assets/image/6.webp",
+      coverUrl: "assets/image/original-better-apart-xiaxguang-ye-shu-hong.webp",
       tags: ["原創", "錄音"],
       visible: true
     },
@@ -158,7 +158,7 @@ window.DEFAULT_CONTENT = {
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/LEMON.mp3",
-      coverUrl: "assets/image/Cover1.webp",
+      coverUrl: "assets/image/cover-lemon-xiaxguang.webp",
       tags: ["翻唱", "Cover"],
       visible: true
     },
@@ -168,7 +168,7 @@ window.DEFAULT_CONTENT = {
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/OVERDOSE.mp3",
-      coverUrl: "assets/image/Cover2.webp",
+      coverUrl: "assets/image/cover-overdose-xiaxguang.webp",
       tags: ["翻唱", "Cover"],
       visible: true
     },
@@ -178,7 +178,7 @@ window.DEFAULT_CONTENT = {
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/XIAXGUANG-我會等.mp3",
-      coverUrl: "assets/image/Cover3.webp",
+      coverUrl: "assets/image/cover-i-will-wait-xiaxguang.webp",
       tags: ["翻唱", "Cover"],
       visible: true
     },
@@ -188,7 +188,7 @@ window.DEFAULT_CONTENT = {
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/晚風告白.mp3",
-      coverUrl: "assets/image/Cover4.webp",
+      coverUrl: "assets/image/cover-evening-breeze-xiaxguang.webp",
       tags: ["翻唱", "Cover"],
       visible: true
     },
@@ -198,7 +198,7 @@ window.DEFAULT_CONTENT = {
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/晚餐歌.mp3",
-      coverUrl: "assets/image/Cover5.webp",
+      coverUrl: "assets/image/cover-dinner-song-xiaxguang.webp",
       tags: ["翻唱", "Cover"],
       visible: true
     },
@@ -208,7 +208,7 @@ window.DEFAULT_CONTENT = {
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/第一個清晨.mp3",
-      coverUrl: "assets/image/Cover6.webp",
+      coverUrl: "assets/image/cover-first-morning-xiaxguang.webp",
       tags: ["翻唱", "Cover"],
       visible: true
     },
@@ -218,7 +218,7 @@ window.DEFAULT_CONTENT = {
       category: "混音",
       type: "audio",
       mediaUrl: "assets/audio/Mixing/他只是經過MMM.mp3",
-      coverUrl: "assets/image/Mixing1.webp",
+      coverUrl: "assets/image/mixing-passing-by-a-jun-ye-shu-hong.webp",
       tags: ["混音", "Vocal Mixing"],
       visible: true
     },
@@ -228,7 +228,7 @@ window.DEFAULT_CONTENT = {
       category: "混音",
       type: "audio",
       mediaUrl: "assets/audio/Mixing/夜晚的太陽.mp3",
-      coverUrl: "assets/image/Mixing2.webp",
+      coverUrl: "assets/image/mixing-night-sun-a-yue.webp",
       tags: ["混音", "後製"],
       visible: true
     },
@@ -238,7 +238,7 @@ window.DEFAULT_CONTENT = {
       category: "混音",
       type: "audio",
       mediaUrl: "assets/audio/Mixing/想.mp3",
-      coverUrl: "assets/image/Mixing3.webp",
+      coverUrl: "assets/image/mixing-thinking-of-you-xiaxguang.webp",
       tags: ["混音", "人聲處理"],
       visible: true
     },
@@ -248,7 +248,7 @@ window.DEFAULT_CONTENT = {
       category: "混音",
       type: "audio",
       mediaUrl: "assets/audio/Mixing/暈了.mp3",
-      coverUrl: "assets/image/Mixing4.webp",
+      coverUrl: "assets/image/mixing-dizzy-xiaxguang.webp",
       tags: ["混音", "後製"],
       visible: true
     },
@@ -258,7 +258,7 @@ window.DEFAULT_CONTENT = {
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/其實我也想 - 阿月.mp3",
-      coverUrl: "assets/image/Arrangement1.webp",
+      coverUrl: "assets/image/arrangement-also-want-a-yue.webp",
       tags: ["編曲", "Arrangement"],
       visible: true
     },
@@ -268,7 +268,7 @@ window.DEFAULT_CONTENT = {
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/叡鎂鋂KO Ver.2.mp3",
-      coverUrl: "assets/image/Arrangement2.webp",
+      coverUrl: "assets/image/arrangement-ko-rui-mei.webp",
       tags: ["編曲", "Arrangement"],
       visible: true
     },
@@ -278,7 +278,7 @@ window.DEFAULT_CONTENT = {
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/員山廣興堂.mp3",
-      coverUrl: "assets/image/Arrangement3.webp",
+      coverUrl: "assets/image/arrangement-yuanshan-guangxing-rb.webp",
       tags: ["編曲", "配樂"],
       visible: true
     },
@@ -288,7 +288,7 @@ window.DEFAULT_CONTENT = {
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/留一半給你MMM.mp3",
-      coverUrl: "assets/image/Arrangement4.webp",
+      coverUrl: "assets/image/arrangement-half-for-you-jiang-ea.webp",
       tags: ["編曲", "Arrangement"],
       visible: true
     },
@@ -298,7 +298,7 @@ window.DEFAULT_CONTENT = {
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/禮拜五的復興路MMM.mp3",
-      coverUrl: "assets/image/Arrangement5.webp",
+      coverUrl: "assets/image/arrangement-friday-fuxing-road.webp",
       tags: ["編曲", "Arrangement"],
       visible: true
     },
@@ -308,7 +308,7 @@ window.DEFAULT_CONTENT = {
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/純音樂.mp3",
-      coverUrl: "assets/image/Arrangement6.webp",
+      coverUrl: "assets/image/arrangement-not-alone-instrumental.webp",
       tags: ["編曲", "純音樂"],
       visible: true
     },
@@ -318,7 +318,7 @@ window.DEFAULT_CONTENT = {
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/虎爺.mp3",
-      coverUrl: "assets/image/Arrangement7.webp",
+      coverUrl: "assets/image/arrangement-tiger-lord-rb.webp",
       tags: ["編曲", "配樂"],
       visible: true
     },
@@ -328,7 +328,7 @@ window.DEFAULT_CONTENT = {
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/都是我不對 MMM.mp3",
-      coverUrl: "assets/image/Arrangement8.webp",
+      coverUrl: "assets/image/arrangement-my-fault-jiang-ea.webp",
       tags: ["編曲", "Arrangement"],
       visible: true
     }

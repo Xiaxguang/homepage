@@ -9,6 +9,7 @@
 - 中文稱呼：`阿光`
 - 公開頁包含 Hero、最新作品播放器、服務摘要、精選作品、Beats 商店、完整作品集、混音前後對比、關於我、製作流程、報價服務、商店與交易說明、服務條款頁與聯絡區
 - 後台可管理基本資料、電話、Discord 聯絡方式、視覺設定、區塊顯示排序、服務報價、作品、Beats、製作流程與混音對比
+- SEO 公開頁包含首頁、混音服務、編曲服務、Beat 商店、作品集、桃園免費宅錄、關於 Xiaxguang、聯絡方式與服務條款
 
 ## 素材
 
@@ -69,6 +70,25 @@ Beat 音檔放在：
 5. 公開頁：`/index.html`
 6. 管理頁：`/admin.html`
 7. 服務條款、授權範圍、隱私與退款：`/terms.html`
+
+## SEO 與搜尋引擎
+
+- 預設 GitHub Pages 正式網址：`https://xiaxguang.github.io/homepage/`
+- `robots.txt`：`https://xiaxguang.github.io/homepage/robots.txt`
+- `sitemap.xml`：`https://xiaxguang.github.io/homepage/sitemap.xml`
+- 公開 SEO 頁面：
+  - `/mixing.html`
+  - `/arrangement.html`
+  - `/beats.html`
+  - `/portfolio.html`
+  - `/taoyuan-recording.html`
+  - `/about.html`
+  - `/contact.html`
+  - `/terms.html`
+
+若改用正式網域或自訂網域，需同步更新各 HTML 的 canonical、Open Graph URL 與 `sitemap.xml`、`robots.txt` 中的網址。
+
+Google Search Console 驗證碼可加入 `index.html` head 內的預留註解位置。
 
 ## Supabase
 

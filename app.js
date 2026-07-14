@@ -217,8 +217,10 @@
     return item.artist || "XIAXGUANG";
   }
 
-  function coverHtml(url, title, className = "brand-placeholder") {
-    if (url) return `<img src="${escapeHtml(url)}" alt="${escapeHtml(title || "cover")}" loading="lazy" onerror="this.closest('.cover-host')?.classList.add('cover-missing');this.remove()">`;
+  function coverHtml(url, title, className = "brand-placeholder", loading = "lazy") {
+    const priority = loading === "eager" ? ' fetchpriority="high"' : "";
+    const alt = title ? `${title} 封面圖片` : "作品封面圖片";
+    if (url) return `<img src="${escapeHtml(url)}" alt="${escapeHtml(alt)}" loading="${escapeHtml(loading)}" decoding="async" width="980" height="980"${priority} onerror="this.closest('.cover-host')?.classList.add('cover-missing');this.remove()">`;
     return `<span class="${className}">XIAXGUANG</span>`;
   }
 
@@ -243,17 +245,17 @@
     setText("footerEmail", p.email || "");
     setText("footerPhone", p.phone || "");
     setText("footerLocation", p.location || "");
-    document.title = "XIAXGUANG｜MUSIC PRODUCER";
+    document.title = "Xiaxguang 音樂製作｜混音、編曲、Beat 販售";
 
     const heroCharacter = $("#heroCharacter");
     if (heroCharacter) {
-      heroCharacter.src = a.heroCharacter || p.heroCharacter || "assets/characters/mascot-seated.png";
+      heroCharacter.src = a.heroCharacter || p.heroCharacter || "assets/characters/mascot-seated.webp";
       heroCharacter.onerror = () => heroCharacter.classList.add("is-missing");
     }
 
     const aboutCharacter = $("#aboutCharacter");
     if (aboutCharacter) {
-      aboutCharacter.src = a.aboutCharacter || p.aboutCharacter || "assets/characters/mascot-crossed.png";
+      aboutCharacter.src = a.aboutCharacter || p.aboutCharacter || "assets/characters/mascot-crossed.webp";
       aboutCharacter.onerror = () => aboutCharacter.classList.add("is-missing");
     }
 
@@ -446,12 +448,14 @@
           ? `<a class="work-play" href="${escapeHtml(external)}" target="_blank" rel="noreferrer" aria-label="開啟 ${escapeHtml(item.title || "作品")}">↗</a>`
           : `<button class="work-play" type="button" disabled aria-label="尚無媒體">▶</button>`;
       const tags = (item.tags || []).slice(0, 3).map(tag => `<span>${escapeHtml(tag)}</span>`).join("");
+      const description = item.description || `${item.title || "這首作品"} 是 ${item.category || "音樂製作"} 類型作品，製作項目包含 ${(item.tags || [item.category || "音樂製作"]).slice(0, 2).join("、")}。`;
       return `
         <article class="work-card reveal">
           <div class="work-thumb cover-host">${coverHtml(item.coverUrl, item.title)}${action}</div>
           <div class="work-body">
             <span class="meta-line">${escapeHtml(item.category || "作品")} · ${escapeHtml(itemArtist(item))}</span>
             <h3>${escapeHtml(item.title || "Untitled")}</h3>
+            <p class="work-description">${escapeHtml(description)}</p>
             <div class="tag-list">${tags}</div>
           </div>
         </article>
@@ -604,7 +608,7 @@
     setText("heroPlayerTitle", item.title || "尚無可播放作品");
     setText("heroPlayerArtist", itemArtist(item));
     setText("dockTitle", item.title || "作品名稱");
-    $("#heroPlayerCover").innerHTML = coverHtml(item.coverUrl, item.title);
+    $("#heroPlayerCover").innerHTML = coverHtml(item.coverUrl, item.title, "brand-placeholder", "eager");
     $("#dockCover").innerHTML = coverHtml(item.coverUrl, item.title);
   }
 
