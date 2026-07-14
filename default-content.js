@@ -94,7 +94,7 @@ window.DEFAULT_CONTENT = {
   works: [
     {
       id: "original-01",
-      title: "1",
+      title: "背景 - XIAXGUANG",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/1.mp3",
@@ -104,7 +104,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "original-02",
-      title: "2",
+      title: "別裝沒看到 - XIAXGUANG",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/2.mp3",
@@ -114,7 +114,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "original-03",
-      title: "3",
+      title: "我要你管我 - XIAXGUANG",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/3.mp3",
@@ -124,7 +124,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "original-04",
-      title: "4",
+      title: "弄丟女朋友 - XIAXGUANG",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/4.mp3",
@@ -134,7 +134,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "original-05",
-      title: "5",
+      title: "離開我 - XIAXGUANG",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/5.mp3",
@@ -144,7 +144,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "original-06",
-      title: "6",
+      title: "還是分開的好 - XIAXGUANG&葉書宏",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/6.mp3",
@@ -154,7 +154,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "cover-lemon",
-      title: "LEMON",
+      title: "LEMON - Cover by Xiaxguang",
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/LEMON.mp3",
@@ -164,7 +164,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "cover-overdose",
-      title: "OVERDOSE",
+      title: "OVERDOSE - Cover by Xiaxguang",
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/OVERDOSE.mp3",
@@ -174,7 +174,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "cover-wait",
-      title: "XIAXGUANG-我會等",
+      title: "我會等 - Cover by Xiaxguang",
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/XIAXGUANG-我會等.mp3",
@@ -184,7 +184,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "cover-evening-breeze",
-      title: "晚風告白",
+      title: "晚風告白 - Cover by Xiaxguang",
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/晚風告白.mp3",
@@ -194,7 +194,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "cover-dinner-song",
-      title: "晚餐歌",
+      title: "晚餐歌 - Cover by Xiaxguang",
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/晚餐歌.mp3",
@@ -204,7 +204,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "cover-first-morning",
-      title: "第一個清晨",
+      title: "第一個清晨 - Cover by Xiaxguang",
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/第一個清晨.mp3",
@@ -214,7 +214,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "mix-passing-by",
-      title: "他只是經過MMM",
+      title: "他只是經過 - Cover by 阿均&葉書宏",
       category: "混音",
       type: "audio",
       mediaUrl: "assets/audio/Mixing/他只是經過MMM.mp3",
@@ -224,7 +224,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "mix-night-sun",
-      title: "夜晚的太陽",
+      title: "夜晚的太陽 - 阿月",
       category: "混音",
       type: "audio",
       mediaUrl: "assets/audio/Mixing/夜晚的太陽.mp3",
@@ -234,7 +234,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "mix-think",
-      title: "想",
+      title: "我在想著你 - Xiaxguang",
       category: "混音",
       type: "audio",
       mediaUrl: "assets/audio/Mixing/想.mp3",
@@ -244,7 +244,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "mix-dizzy",
-      title: "暈了",
+      title: "暈了 - Xiaxguang",
       category: "混音",
       type: "audio",
       mediaUrl: "assets/audio/Mixing/暈了.mp3",
@@ -264,7 +264,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "arrangement-rui-mei",
-      title: "叡鎂鋂KO Ver.2",
+      title: "KO - 叡鎂鋂",
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/叡鎂鋂KO Ver.2.mp3",
@@ -274,7 +274,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "arrangement-yuanshan",
-      title: "員山廣興堂",
+      title: "員山廣興堂 - RB",
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/員山廣興堂.mp3",
@@ -284,7 +284,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "arrangement-half-for-you",
-      title: "留一半給你MMM",
+      title: "留一半給你 - 姜EA",
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/留一半給你MMM.mp3",
@@ -294,7 +294,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "arrangement-friday",
-      title: "禮拜五的復興路MMM",
+      title: "禮拜五的復興路 - 葉書宏&蕭斯文",
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/禮拜五的復興路MMM.mp3",
@@ -304,7 +304,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "arrangement-instrumental",
-      title: "純音樂",
+      title: "Not Alone instrumental",
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/純音樂.mp3",
@@ -314,7 +314,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "arrangement-tiger-lord",
-      title: "虎爺",
+      title: "虎爺 - RB",
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/虎爺.mp3",
@@ -324,7 +324,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "arrangement-my-fault",
-      title: "都是我不對 MMM",
+      title: "都是我不對 - 姜EA",
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/都是我不對 MMM.mp3",
