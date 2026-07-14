@@ -94,7 +94,7 @@ window.DEFAULT_CONTENT = {
   works: [
     {
       id: "original-01",
-      title: "原創作品 01",
+      title: "1",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/1.mp3",
@@ -104,7 +104,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "original-02",
-      title: "原創作品 02",
+      title: "2",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/2.mp3",
@@ -114,7 +114,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "original-03",
-      title: "原創作品 03",
+      title: "3",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/3.mp3",
@@ -124,7 +124,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "original-04",
-      title: "原創作品 04",
+      title: "4",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/4.mp3",
@@ -134,7 +134,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "original-05",
-      title: "原創作品 05",
+      title: "5",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/5.mp3",
@@ -144,7 +144,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "original-06",
-      title: "原創作品 06",
+      title: "6",
       category: "原創",
       type: "audio",
       mediaUrl: "assets/audio/Original/6.mp3",
@@ -174,7 +174,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "cover-wait",
-      title: "XIAXGUANG - 我會等",
+      title: "XIAXGUANG-我會等",
       category: "翻唱",
       type: "audio",
       mediaUrl: "assets/audio/COVER/XIAXGUANG-我會等.mp3",
@@ -214,7 +214,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "mix-passing-by",
-      title: "他只是經過 MMM",
+      title: "他只是經過MMM",
       category: "混音",
       type: "audio",
       mediaUrl: "assets/audio/Mixing/他只是經過MMM.mp3",
@@ -264,7 +264,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "arrangement-rui-mei",
-      title: "叡鎂鋂 KO Ver.2",
+      title: "叡鎂鋂KO Ver.2",
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/叡鎂鋂KO Ver.2.mp3",
@@ -284,7 +284,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "arrangement-half-for-you",
-      title: "留一半給你 MMM",
+      title: "留一半給你MMM",
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/留一半給你MMM.mp3",
@@ -294,7 +294,7 @@ window.DEFAULT_CONTENT = {
     },
     {
       id: "arrangement-friday",
-      title: "禮拜五的復興路 MMM",
+      title: "禮拜五的復興路MMM",
       category: "編曲",
       type: "audio",
       mediaUrl: "assets/audio/Arrangement/禮拜五的復興路MMM.mp3",
