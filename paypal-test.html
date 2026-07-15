@@ -97,6 +97,33 @@
       color: #b3261e;
     }
 
+    #download-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .download-button {
+      display: block;
+      padding: 13px 16px;
+      border-radius: 10px;
+      background: #202124;
+      color: #ffffff;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .download-button:hover {
+      opacity: 0.88;
+    }
+
+    .download-note {
+      margin: 0;
+      font-size: 13px;
+      color: #6b7280;
+    }
+
     .notice {
       margin-top: 18px;
       font-size: 14px;
@@ -117,32 +144,27 @@
 
     <div id="paypal-button-container"></div>
 
-    <div id="status" role="status"></div>
+    <div
+      id="status"
+      role="status"
+    ></div>
+
+    <div id="download-list"></div>
 
     <p class="notice">
       目前使用 PayPal Sandbox，不會扣除真實款項。
     </p>
   </main>
 
-  <!--
-    把 YOUR_PAYPAL_SANDBOX_CLIENT_ID
-    換成 PayPal Sandbox App 的 Client ID。
-    不能放 Client Secret。
-  -->
+  <!-- 只能放 Sandbox Client ID，不能放 Client Secret -->
   <script
     src="https://www.paypal.com/sdk/js?client-id=BAAbllqASyUEzJBcyi0v810YNw5LqWu2p-4U2hW_P7HdtWwenB9ogsRKMF6diFrhX8BThH2ZoyMT1sZ-40&currency=USD&intent=capture&components=buttons"
   ></script>
 
   <script>
-    /*
-     * 需要替換的兩個值：
-     *
-     * 1. SUPABASE_URL
-     * 2. SUPABASE_PUBLISHABLE_KEY
-     *
-     * Publishable key 可以放在網站前端。
-     * 絕對不能使用 sb_secret_...。
-     */
+    // =====================================================
+    // 1. 網站與商品設定
+    // =====================================================
 
     const SUPABASE_URL =
       "https://vvxozxwdblhiprhvtkic.supabase.co";
@@ -150,10 +172,6 @@
     const SUPABASE_PUBLISHABLE_KEY =
       "sb_publishable_bzpk6NquJXCSS--n34QICg_1yuhD305";
 
-    /*
-     * 這是你目前 BASIC 基礎授權的 UUID。
-     * 它不是金鑰，可以放在前端。
-     */
     const LICENSE_ID =
       "36ff8339-b1c2-4495-91f4-2fa53cf36217";
 
@@ -163,27 +181,151 @@
     const CAPTURE_ORDER_URL =
       `${SUPABASE_URL}/functions/v1/paypal-capture-order`;
 
+    const DOWNLOADS_URL =
+      `${SUPABASE_URL}/functions/v1/order-downloads`;
+
+
+    // =====================================================
+    // 2. 取得頁面元素
+    // =====================================================
+
     const statusElement =
       document.getElementById("status");
+
+    const downloadListElement =
+      document.getElementById("download-list");
+
+
+    // =====================================================
+    // 3. 顯示付款狀態
+    // =====================================================
 
     function showStatus(type, message) {
       statusElement.className = type;
       statusElement.textContent = message;
     }
 
-    async function callEdgeFunction(url, body) {
-      const response = await fetch(url, {
-        method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": SUPABASE_PUBLISHABLE_KEY,
-        },
+    // =====================================================
+    // 4. 顯示下載按鈕
+    // 這就是你之前找不到的第五步內容
+    // =====================================================
 
-        body: JSON.stringify(body),
+    function renderDownloadLinks(result) {
+      downloadListElement.innerHTML = "";
+
+      const downloads =
+        Array.isArray(result.downloads)
+          ? result.downloads
+          : [];
+
+      downloads.forEach((file) => {
+        if (!file.signed_url) {
+          return;
+        }
+
+        const link =
+          document.createElement("a");
+
+        link.className =
+          "download-button";
+
+        link.href =
+          file.signed_url;
+
+        link.textContent =
+          `下載 ${file.display_name || "商品檔案"}`;
+
+        link.rel =
+          "noopener";
+
+        downloadListElement.appendChild(
+          link,
+        );
       });
 
-      const responseText = await response.text();
+      if (downloads.length > 0) {
+        const note =
+          document.createElement("p");
+
+        note.className =
+          "download-note";
+
+        note.textContent =
+          "下載網址每次產生後有效 5 分鐘；連結過期可重新取得，不需要再次付款。";
+
+        downloadListElement.appendChild(
+          note,
+        );
+      }
+    }
+
+
+    // =====================================================
+    // 5. 自動下載第一個檔案
+    // =====================================================
+
+    function startFirstDownload(result) {
+      const downloads =
+        Array.isArray(result.downloads)
+          ? result.downloads
+          : [];
+
+      const firstFile =
+        downloads[0];
+
+      if (!firstFile?.signed_url) {
+        return;
+      }
+
+      const temporaryLink =
+        document.createElement("a");
+
+      temporaryLink.href =
+        firstFile.signed_url;
+
+      temporaryLink.rel =
+        "noopener";
+
+      temporaryLink.style.display =
+        "none";
+
+      document.body.appendChild(
+        temporaryLink,
+      );
+
+      temporaryLink.click();
+      temporaryLink.remove();
+    }
+
+
+    // =====================================================
+    // 6. 呼叫 Supabase Edge Function
+    // =====================================================
+
+    async function callEdgeFunction(
+      url,
+      body,
+    ) {
+      const response = await fetch(
+        url,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "apikey":
+              SUPABASE_PUBLISHABLE_KEY,
+          },
+
+          body: JSON.stringify(body),
+        },
+      );
+
+      const responseText =
+        await response.text();
 
       let data;
 
@@ -192,23 +334,36 @@
           ? JSON.parse(responseText)
           : {};
       } catch {
-        data = {
-          ok: false,
-          message: responseText || "伺服器回傳格式錯誤。",
-        };
+        throw new Error(
+          [
+            "伺服器回傳格式錯誤。",
+            `HTTP 狀態：${response.status}`,
+            `回傳內容：${responseText || "空白"}`,
+          ].join("\n"),
+        );
       }
 
-      if (!response.ok || data.ok === false) {
-        const errorMessage =
-          data.message ||
-          data.error ||
-          `請求失敗，HTTP ${response.status}`;
-
-        throw new Error(errorMessage);
+      if (
+        !response.ok ||
+        data.ok === false
+      ) {
+        throw new Error(
+          [
+            data.message ||
+              data.error ||
+              "伺服器請求失敗。",
+            `HTTP 狀態：${response.status}`,
+          ].join("\n"),
+        );
       }
 
       return data;
     }
+
+
+    // =====================================================
+    // 7. 確認 PayPal SDK 已載入
+    // =====================================================
 
     if (!window.paypal) {
       showStatus(
@@ -216,8 +371,15 @@
         "PayPal SDK 載入失敗，請檢查 Sandbox Client ID。",
       );
 
-      throw new Error("PayPal SDK 未載入");
+      throw new Error(
+        "PayPal SDK 未載入",
+      );
     }
+
+
+    // =====================================================
+    // 8. 建立 PayPal 付款按鈕
+    // =====================================================
 
     paypal.Buttons({
       style: {
@@ -226,26 +388,31 @@
         label: "paypal",
       },
 
-      /*
-       * 客戶點擊 PayPal 按鈕時：
-       * 向 Supabase 取得 PayPal Order ID。
-       */
+
+      // ---------------------------------------------------
+      // 建立 PayPal 訂單
+      // ---------------------------------------------------
+
       createOrder: async () => {
+        downloadListElement.innerHTML = "";
+
         showStatus(
           "info",
           "正在建立 PayPal 測試訂單……",
         );
 
-        const result = await callEdgeFunction(
-          CREATE_ORDER_URL,
-          {
-            license_id: LICENSE_ID,
-          },
-        );
+        const result =
+          await callEdgeFunction(
+            CREATE_ORDER_URL,
+            {
+              license_id:
+                LICENSE_ID,
+            },
+          );
 
         if (!result.paypal_order_id) {
           throw new Error(
-            "後端沒有回傳 paypal_order_id。",
+            "後端沒有回傳 PayPal 訂單編號。",
           );
         }
 
@@ -261,49 +428,104 @@
         return result.paypal_order_id;
       },
 
-      /*
-       * 客戶在 PayPal 視窗核准後：
-       * 呼叫 Supabase 後端執行 Capture。
-       */
+
+      // ---------------------------------------------------
+      // 買家核准後執行收款與下載
+      // ---------------------------------------------------
+
       onApprove: async (data) => {
+        downloadListElement.innerHTML = "";
+
         showStatus(
           "info",
           "買家已核准，正在確認並完成收款……",
         );
 
-        const result = await callEdgeFunction(
-          CAPTURE_ORDER_URL,
-          {
-            paypal_order_id: data.orderID,
-          },
-        );
+        const paymentResult =
+          await callEdgeFunction(
+            CAPTURE_ORDER_URL,
+            {
+              paypal_order_id:
+                data.orderID,
+            },
+          );
 
-        if (result.payment_completed === true) {
+        if (
+          paymentResult.payment_completed !==
+          true
+        ) {
           showStatus(
-            "success",
-            [
-              "付款測試成功！",
-              `網站訂單編號：${result.order_number}`,
-              `PayPal 訂單編號：${result.paypal_order_id}`,
-              `Capture ID：${result.paypal_capture_id}`,
-              `金額：${result.currency} ${result.amount}`,
-              result.payer_email
-                ? `付款人信箱：${result.payer_email}`
-                : "",
-            ]
-              .filter(Boolean)
-              .join("\n"),
+            "info",
+            paymentResult.message ||
+              "付款仍在處理中，尚未完成。",
           );
 
           return;
         }
 
+        if (
+          !paymentResult.download_token
+        ) {
+          throw new Error(
+            "付款已完成，但後端沒有回傳下載憑證。",
+          );
+        }
+
+        // 下載憑證只暫存在目前瀏覽器分頁
+        sessionStorage.setItem(
+          "latest_download_token",
+          paymentResult.download_token,
+        );
+
         showStatus(
           "info",
-          result.message ||
-            "付款仍在處理中，尚未完成。",
+          "付款成功，正在準備私人下載檔案……",
+        );
+
+        const downloadResult =
+          await callEdgeFunction(
+            DOWNLOADS_URL,
+            {
+              download_token:
+                paymentResult.download_token,
+            },
+          );
+
+        renderDownloadLinks(
+          downloadResult,
+        );
+
+        showStatus(
+          "success",
+          [
+            "付款成功，下載已準備完成！",
+            `網站訂單編號：${paymentResult.order_number}`,
+            `PayPal 訂單編號：${paymentResult.paypal_order_id}`,
+            `金額：${paymentResult.currency} ${paymentResult.amount}`,
+
+            paymentResult.payer_email
+              ? `付款人信箱：${paymentResult.payer_email}`
+              : "",
+
+            paymentResult.download_expires_at
+              ? `下載資格期限：${new Date(
+                  paymentResult.download_expires_at,
+                ).toLocaleString("zh-TW")}`
+              : "",
+          ]
+            .filter(Boolean)
+            .join("\n"),
+        );
+
+        startFirstDownload(
+          downloadResult,
         );
       },
+
+
+      // ---------------------------------------------------
+      // 客人取消付款
+      // ---------------------------------------------------
 
       onCancel: () => {
         showStatus(
@@ -312,15 +534,28 @@
         );
       },
 
+
+      // ---------------------------------------------------
+      // 付款發生錯誤
+      // ---------------------------------------------------
+
       onError: (error) => {
-        console.error("PayPal Checkout error:", error);
+        console.error(
+          "PayPal Checkout error:",
+          error,
+        );
 
         showStatus(
           "error",
-          `付款發生錯誤：${error.message || error}`,
+          `付款發生錯誤：${
+            error?.message ||
+            String(error)
+          }`,
         );
       },
-    }).render("#paypal-button-container");
+    }).render(
+      "#paypal-button-container",
+    );
   </script>
 </body>
 </html>
