@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>PayPal Sandbox 付款測試</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 40px 20px;
+      font-family:
+        Arial,
+        "Noto Sans TC",
+        sans-serif;
+      background: #f5f6f8;
+      color: #202124;
+    }
+
+    .checkout-card {
+      width: min(100%, 520px);
+      margin: 0 auto;
+      padding: 28px;
+      border-radius: 16px;
+      background: #ffffff;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 26px;
+    }
+
+    .product {
+      margin: 20px 0;
+      padding: 18px;
+      border: 1px solid #e1e4e8;
+      border-radius: 12px;
+    }
+
+    .product-name {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .license-name {
+      margin: 0 0 12px;
+      color: #5f6368;
+    }
+
+    .price {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    #paypal-button-container {
+      margin-top: 24px;
+    }
+
+    #status {
+      display: none;
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 10px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    #status.info {
+      display: block;
+      background: #e8f0fe;
+      color: #174ea6;
+    }
+
+    #status.success {
+      display: block;
+      background: #e6f4ea;
+      color: #137333;
+    }
+
+    #status.error {
+      display: block;
+      background: #fce8e6;
+      color: #b3261e;
+    }
+
+    .notice {
+      margin-top: 18px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="checkout-card">
+    <h1>PayPal Sandbox 測試</h1>
+
+    <section class="product">
+      <p class="product-name">測試 Beat</p>
+      <p class="license-name">基礎授權</p>
+      <p class="price">US$29.00</p>
+    </section>
+
+    <div id="paypal-button-container"></div>
+
+    <div id="status" role="status"></div>
+
+    <p class="notice">
+      目前使用 PayPal Sandbox，不會扣除真實款項。
+    </p>
+  </main>
+
+  <!--
+    把 YOUR_PAYPAL_SANDBOX_CLIENT_ID
+    換成 PayPal Sandbox App 的 Client ID。
+    不能放 Client Secret。
+  -->
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=BAAbllqASyUEzJBcyi0v810YNw5LqWu2p-4U2hW_P7HdtWwenB9ogsRKMF6diFrhX8BThH2ZoyMT1sZ-40&currency=USD&intent=capture&components=buttons"
+  ></script>
+
+  <script>
+    /*
+     * 需要替換的兩個值：
+     *
+     * 1. SUPABASE_URL
+     * 2. SUPABASE_PUBLISHABLE_KEY
+     *
+     * Publishable key 可以放在網站前端。
+     * 絕對不能使用 sb_secret_...。
+     */
+
+    const SUPABASE_URL =
+      "https://vvxozxwdblhiprhvtkic.supabase.co/rest/v1";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_bzpk6NquJXCSS--n34QICg_1yuhD305";
+
+    /*
+     * 這是你目前 BASIC 基礎授權的 UUID。
+     * 它不是金鑰，可以放在前端。
+     */
+    const LICENSE_ID =
+      "36ff8339-b1c2-4495-91f4-2fa53cf36217";
+
+    const CREATE_ORDER_URL =
+      `${SUPABASE_URL}/functions/v1/paypal-create-order`;
+
+    const CAPTURE_ORDER_URL =
+      `${SUPABASE_URL}/functions/v1/paypal-capture-order`;
+
+    const statusElement =
+      document.getElementById("status");
+
+    function showStatus(type, message) {
+      statusElement.className = type;
+      statusElement.textContent = message;
+    }
+
+    async function callEdgeFunction(url, body) {
+      const response = await fetch(url, {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_PUBLISHABLE_KEY,
+        },
+
+        body: JSON.stringify(body),
+      });
+
+      const responseText = await response.text();
+
+      let data;
+
+      try {
+        data = responseText
+          ? JSON.parse(responseText)
+          : {};
+      } catch {
+        data = {
+          ok: false,
+          message: responseText || "伺服器回傳格式錯誤。",
+        };
+      }
+
+      if (!response.ok || data.ok === false) {
+        const errorMessage =
+          data.message ||
+          data.error ||
+          `請求失敗，HTTP ${response.status}`;
+
+        throw new Error(errorMessage);
+      }
+
+      return data;
+    }
+
+    if (!window.paypal) {
+      showStatus(
+        "error",
+        "PayPal SDK 載入失敗，請檢查 Sandbox Client ID。",
+      );
+
+      throw new Error("PayPal SDK 未載入");
+    }
+
+    paypal.Buttons({
+      style: {
+        layout: "vertical",
+        shape: "rect",
+        label: "paypal",
+      },
+
+      /*
+       * 客戶點擊 PayPal 按鈕時：
+       * 向 Supabase 取得 PayPal Order ID。
+       */
+      createOrder: async () => {
+        showStatus(
+          "info",
+          "正在建立 PayPal 測試訂單……",
+        );
+
+        const result = await callEdgeFunction(
+          CREATE_ORDER_URL,
+          {
+            license_id: LICENSE_ID,
+          },
+        );
+
+        if (!result.paypal_order_id) {
+          throw new Error(
+            "後端沒有回傳 paypal_order_id。",
+          );
+        }
+
+        showStatus(
+          "info",
+          [
+            "訂單建立成功，請在 PayPal 視窗中核准付款。",
+            `網站訂單編號：${result.order_number}`,
+            `金額：${result.currency} ${result.amount}`,
+          ].join("\n"),
+        );
+
+        return result.paypal_order_id;
+      },
+
+      /*
+       * 客戶在 PayPal 視窗核准後：
+       * 呼叫 Supabase 後端執行 Capture。
+       */
+      onApprove: async (data) => {
+        showStatus(
+          "info",
+          "買家已核准，正在確認並完成收款……",
+        );
+
+        const result = await callEdgeFunction(
+          CAPTURE_ORDER_URL,
+          {
+            paypal_order_id: data.orderID,
+          },
+        );
+
+        if (result.payment_completed === true) {
+          showStatus(
+            "success",
+            [
+              "付款測試成功！",
+              `網站訂單編號：${result.order_number}`,
+              `PayPal 訂單編號：${result.paypal_order_id}`,
+              `Capture ID：${result.paypal_capture_id}`,
+              `金額：${result.currency} ${result.amount}`,
+              result.payer_email
+                ? `付款人信箱：${result.payer_email}`
+                : "",
+            ]
+              .filter(Boolean)
+              .join("\n"),
+          );
+
+          return;
+        }
+
+        showStatus(
+          "info",
+          result.message ||
+            "付款仍在處理中，尚未完成。",
+        );
+      },
+
+      onCancel: () => {
+        showStatus(
+          "info",
+          "你已取消這次 PayPal 測試付款。",
+        );
+      },
+
+      onError: (error) => {
+        console.error("PayPal Checkout error:", error);
+
+        showStatus(
+          "error",
+          `付款發生錯誤：${error.message || error}`,
+        );
+      },
+    }).render("#paypal-button-container");
+  </script>
+</body>
+</html>
