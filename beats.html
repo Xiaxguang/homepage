@@ -4,25 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#050706">
-  <meta name="description" content="Xiaxguang Beat 伴奏販售與授權說明，可線上試聽並聯絡洽詢授權、客製配樂與歌曲製作合作。">
+  <meta name="description" content="Xiaxguang Beat 伴奏授權商店，可線上試聽 Beat、選擇授權方案，並透過 PayPal Sandbox 完成測試購買後取得私人下載連結。">
   <meta name="robots" content="index,follow">
-  <title>Beat 伴奏販售｜授權說明與線上試聽</title>
+  <title>Beat 伴奏授權商店｜線上試聽與授權購買</title>
   <link rel="canonical" href="https://xiaxguang.github.io/homepage/beats.html">
   <link rel="icon" type="image/png" href="assets/characters/mascot-seated.png">
   <link rel="apple-touch-icon" href="assets/characters/mascot-seated.png">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Xiaxguang 音樂製作">
-  <meta property="og:title" content="Beat 伴奏販售｜授權說明與線上試聽">
-  <meta property="og:description" content="Beat 授權、伴奏試聽與客製配樂合作，適合歌手、VTuber、直播主與創作者。">
+  <meta property="og:title" content="Beat 伴奏授權商店｜線上試聽與授權購買">
+  <meta property="og:description" content="試聽 Xiaxguang Beat，選擇 BASIC、PREMIUM 或 UNLIMITED 授權，付款完成後取得 MP3、WAV 與授權文件下載。">
   <meta property="og:url" content="https://xiaxguang.github.io/homepage/beats.html">
   <meta property="og:image" content="https://xiaxguang.github.io/homepage/assets/media/cover-neon-velocity.webp">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Beat 伴奏販售｜授權說明與線上試聽">
-  <meta name="twitter:description" content="Xiaxguang Beat 商店目前以聯絡洽詢授權為主，可先聽作品再討論用途。">
+  <meta name="twitter:title" content="Beat 伴奏授權商店｜線上試聽與授權購買">
+  <meta name="twitter:description" content="Xiaxguang Beat 授權商店，支援線上試聽、授權選擇、PayPal Sandbox 測試付款與私人下載。">
   <meta name="twitter:image" content="https://xiaxguang.github.io/homepage/assets/media/cover-neon-velocity.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.paypal.com">
+  <link rel="preconnect" href="https://vvxozxwdblhiprhvtkic.supabase.co">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script type="application/ld+json">
@@ -32,10 +34,14 @@
       {
         "@type": "Service",
         "@id": "https://xiaxguang.github.io/homepage/beats.html#service",
-        "name": "Beat 伴奏販售與授權",
+        "name": "Beat 伴奏授權商店",
         "serviceType": "Beat licensing",
-        "provider": { "@type": "Person", "name": "Xiaxguang", "url": "https://xiaxguang.github.io/homepage/" },
-        "description": "Beat 伴奏試聽、授權洽詢與客製配樂合作。"
+        "provider": {
+          "@type": "Person",
+          "name": "Xiaxguang",
+          "url": "https://xiaxguang.github.io/homepage/"
+        },
+        "description": "Beat 伴奏試聽、授權購買與數位檔案交付服務。"
       },
       {
         "@type": "BreadcrumbList",
@@ -50,7 +56,10 @@
 </head>
 <body>
   <header class="site-header" id="siteHeader">
-    <a class="brand" href="index.html" aria-label="回到首頁"><span class="wave-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="brand-copy"><strong>XIAXGUANG</strong><small>MUSIC PRODUCER</small></span></a>
+    <a class="brand" href="index.html" aria-label="回到首頁">
+      <span class="wave-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="brand-copy"><strong>XIAXGUANG</strong><small>MUSIC PRODUCER</small></span>
+    </a>
     <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="開啟選單"><span></span><span></span><span></span></button>
     <nav class="site-nav" id="siteNav" aria-label="主要導覽">
       <a href="index.html">首頁</a>
@@ -64,44 +73,87 @@
     <div class="header-actions"><a class="header-cta" href="contact.html">授權洽詢 <span aria-hidden="true">↗</span></a></div>
   </header>
 
-  <main class="static-page">
+  <main class="static-page beat-shop-page">
     <nav class="breadcrumb section-shell" aria-label="麵包屑"><a href="index.html">首頁</a><span>Beat 商店</span></nav>
-    <section class="static-hero section-shell">
+
+    <section class="static-hero section-shell beat-shop-hero">
       <p class="eyebrow">BEATS STORE</p>
-      <h1>Beat 伴奏販售</h1>
-      <p>提供 Beat 伴奏試聽、授權洽詢與客製配樂合作。正式使用前會確認公開用途、商業用途、分潤、買斷或其他授權條件。</p>
+      <h1>Beat 伴奏授權商店</h1>
+      <p>先試聽喜歡的 Beat，再選擇合適授權方案。付款流程透過 PayPal 建立訂單，完成後會取得 MP3、WAV 與授權 PDF 等私人下載連結。</p>
       <div class="hero-actions">
-        <a class="button primary" href="contact.html">聯絡洽詢授權 <span aria-hidden="true">→</span></a>
-        <a class="button secondary" href="index.html#beats">回首頁試聽</a>
+        <a class="button primary" href="#beatStoreApp">瀏覽 Beat <span aria-hidden="true">↓</span></a>
+        <a class="button secondary" href="terms.html#beat-license">查看授權條款</a>
       </div>
+      <p class="beat-shop-mode-note" id="beatShopModeNote">目前付款流程使用 PayPal Sandbox 測試模式；日後可於設定切換正式收款。</p>
     </section>
 
-    <section class="section-shell static-grid beat-seo-list">
-      <article class="static-card glass-panel">
-        <img src="assets/media/cover-neon-velocity.webp" alt="Neon Velocity Beat 封面" width="980" height="980" loading="lazy" decoding="async">
-        <h2>Neon Velocity</h2>
-        <p>Synthwave 風格 Beat，BPM 129，適合速度感、霓虹感與流行電子方向。</p>
+    <section class="section-shell beat-shop-flow" aria-label="購買流程">
+      <article class="glass-panel">
+        <span>01</span>
+        <strong>試聽 Beat</strong>
+        <p>先確認曲風、節奏與作品方向。</p>
       </article>
-      <article class="static-card glass-panel">
-        <img src="assets/media/cover-demon-core.webp" alt="Midnight Core Beat 封面" width="980" height="980" loading="lazy" decoding="async">
-        <h2>Midnight Core</h2>
-        <p>Dark Trap 風格 Beat，BPM 144，適合低暗氛圍、饒唱與強節奏作品。</p>
+      <article class="glass-panel">
+        <span>02</span>
+        <strong>選擇授權</strong>
+        <p>依用途選擇 BASIC、PREMIUM 或 UNLIMITED。</p>
       </article>
-      <article class="static-card glass-panel">
-        <img src="assets/media/cover-astral-gate.webp" alt="Astral Gate Beat 封面" width="980" height="980" loading="lazy" decoding="async">
-        <h2>Astral Gate</h2>
-        <p>Cinematic Trap 風格 Beat，BPM 136，適合具有空間感與戲劇張力的企劃。</p>
+      <article class="glass-panel">
+        <span>03</span>
+        <strong>PayPal 付款</strong>
+        <p>付款資料由 PayPal 與後端流程處理。</p>
+      </article>
+      <article class="glass-panel">
+        <span>04</span>
+        <strong>私人下載</strong>
+        <p>取得短效簽章連結下載授權檔案。</p>
       </article>
     </section>
 
-    <section class="section-shell static-panel glass-panel">
-      <h2>授權確認</h2>
-      <p>目前 Beat 商店以先聯繫管理員為主，不直接提供線上付款。請提供預計使用平台、公開範圍、是否營利、是否需要買斷或分軌，確認後再安排授權與交付。</p>
+    <section class="section-shell beat-shop-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">LICENSED BEATS</p>
+          <h2>選擇 Beat 與授權</h2>
+        </div>
+        <a class="button secondary" href="contact.html">需要客製請聯絡</a>
+      </div>
+      <div id="beatStoreApp" class="beat-shop-app" aria-live="polite">
+        <div class="beat-shop-loading glass-panel">
+          <span></span><span></span><span></span>
+          <p>正在讀取 Beat 商店資料...</p>
+        </div>
+      </div>
     </section>
   </main>
 
+  <div class="beat-checkout-modal" id="beatCheckoutModal" hidden>
+    <div class="beat-checkout-dialog glass-panel" role="dialog" aria-modal="true" aria-labelledby="beatCheckoutTitle">
+      <button class="beat-checkout-close" id="beatCheckoutClose" type="button" aria-label="關閉付款視窗">×</button>
+      <div class="beat-checkout-grid">
+        <div>
+          <p class="eyebrow">CHECKOUT</p>
+          <h2 id="beatCheckoutTitle">確認 Beat 授權</h2>
+          <div id="beatCheckoutSummary" class="beat-checkout-summary"></div>
+        </div>
+        <div class="beat-checkout-payment">
+          <label class="beat-terms-check">
+            <input id="beatTermsAgree" type="checkbox">
+            <span>我已閱讀並同意授權範圍、服務條款、隱私與退款說明。</span>
+          </label>
+          <div id="beatPaypalButtons" class="beat-paypal-buttons" aria-label="PayPal 付款按鈕"></div>
+          <div id="beatCheckoutStatus" class="beat-checkout-status" role="status" aria-live="polite"></div>
+          <div id="beatDownloadList" class="beat-download-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer class="site-footer section-shell">
-    <div class="footer-brand"><span class="wave-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><div><strong>XIAXGUANG</strong><small>MUSIC PRODUCER</small></div></div>
+    <div class="footer-brand">
+      <span class="wave-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      <div><strong>XIAXGUANG</strong><small>MUSIC PRODUCER</small></div>
+    </div>
     <div class="footer-meta">
       <a href="mixing.html">混音服務</a>
       <a href="arrangement.html">編曲服務</a>
@@ -111,6 +163,10 @@
     </div>
     <span class="footer-wave" aria-hidden="true"></span>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
   <script src="seo-pages.js"></script>
+  <script src="beats-store.js"></script>
 </body>
 </html>

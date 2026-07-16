@@ -359,8 +359,8 @@ window.DEFAULT_CONTENT = {
       bpm: 129,
       key: "F# major",
       genre: "Synthwave",
-      priceLabel: "洽詢授權",
-      purchaseUrl: "",
+      priceLabel: "選擇授權",
+      purchaseUrl: "beats.html?beat=neon-velocity",
       visible: true
     },
     {
@@ -371,8 +371,8 @@ window.DEFAULT_CONTENT = {
       bpm: 144,
       key: "F minor",
       genre: "Dark Trap",
-      priceLabel: "洽詢授權",
-      purchaseUrl: "",
+      priceLabel: "選擇授權",
+      purchaseUrl: "beats.html?beat=midnight-core",
       visible: true
     },
     {
@@ -383,8 +383,8 @@ window.DEFAULT_CONTENT = {
       bpm: 136,
       key: "C major",
       genre: "Cinematic Trap",
-      priceLabel: "洽詢授權",
-      purchaseUrl: "",
+      priceLabel: "選擇授權",
+      purchaseUrl: "beats.html?beat=astral-gate",
       visible: true
     },
     {
@@ -395,8 +395,8 @@ window.DEFAULT_CONTENT = {
       bpm: 123,
       key: "A minor",
       genre: "Wave",
-      priceLabel: "洽詢授權",
-      purchaseUrl: "",
+      priceLabel: "選擇授權",
+      purchaseUrl: "beats.html?beat=echo-rift",
       visible: true
     },
     {
@@ -407,8 +407,8 @@ window.DEFAULT_CONTENT = {
       bpm: 144,
       key: "Bb major",
       genre: "Rainy Lo-fi",
-      priceLabel: "洽詢授權",
-      purchaseUrl: "",
+      priceLabel: "選擇授權",
+      purchaseUrl: "beats.html?beat=rainy-nights",
       visible: true
     }
   ]

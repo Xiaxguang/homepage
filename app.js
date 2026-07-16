@@ -234,6 +234,16 @@
     return `<div class="beat-thumb cover-host">${coverHtml(item.coverUrl, title)}</div>`;
   }
 
+  function beatStoreUrl(item) {
+    const raw = String(item.slug || item.id || item.title || "").trim();
+    const slug = raw
+      .toLowerCase()
+      .replace(/^beat-/, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    return `beats.html${slug ? `?beat=${encodeURIComponent(slug)}` : ""}`;
+  }
+
   function applyProfile() {
     const p = content.profile || {};
     const a = content.appearance || {};
@@ -496,14 +506,14 @@
     const summary = $("#beatSummary");
     const store = $("#beatStore");
     const beats = visibleItems(content.beats);
-    const contactForBeats = `<div class="empty-state">Beat 授權與客製配樂可透過聯絡方式洽詢</div>`;
+    const contactForBeats = `<div class="empty-state">Beat 授權商店資料載入中，若暫時無法購買可先透過聯絡方式洽詢</div>`;
 
     if (summary) {
       summary.innerHTML = beats.length ? beats.slice(0, 3).map(item => `
         <div class="beat-row">
           ${beatCover(item)}
           <span><strong>${escapeHtml(item.title || "Untitled Beat")}</strong><span>BPM ${escapeHtml(item.bpm || "-")} / ${escapeHtml(item.key || "-")}</span></span>
-          ${item.purchaseUrl ? `<a class="beat-action" href="${escapeHtml(item.purchaseUrl)}" target="_blank" rel="noreferrer" aria-label="前往 ${escapeHtml(item.title || "Beat")}">↗</a>` : `<a class="beat-action" href="#contact" aria-label="洽詢 ${escapeHtml(item.title || "Beat")}">↗</a>`}
+          <a class="beat-action" href="${escapeHtml(item.purchaseUrl || beatStoreUrl(item))}" aria-label="前往 ${escapeHtml(item.title || "Beat")} 授權頁">↗</a>
         </div>
       `).join("") : contactForBeats;
     }
@@ -513,9 +523,7 @@
         const preview = item.audioUrl
           ? `<audio class="beat-preview" controls preload="metadata" src="${escapeHtml(item.audioUrl)}"></audio>`
           : "";
-        const action = item.purchaseUrl
-          ? `<a class="button primary" href="${escapeHtml(item.purchaseUrl)}" target="_blank" rel="noreferrer">${escapeHtml(item.priceLabel || "購買授權")}</a>`
-          : `<a class="button secondary" href="#contact">${escapeHtml(item.priceLabel || "洽詢授權")}</a>`;
+        const action = `<a class="button primary" href="${escapeHtml(item.purchaseUrl || beatStoreUrl(item))}">${escapeHtml(item.priceLabel || "選擇授權")}</a>`;
         return `
           <article class="beat-card reveal">
             ${beatCover(item)}
