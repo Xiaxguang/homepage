@@ -7,8 +7,11 @@
     currency: "USD",
     ...(ROOT_CONFIG.store || {})
   };
+  const STORE_MODE = String(STORE_CONFIG.mode || "sandbox").toLowerCase() === "live" ? "live" : "sandbox";
   const SUPABASE_URL = STORE_CONFIG.supabaseUrl || ROOT_CONFIG.supabaseUrl || "";
   const SUPABASE_KEY = STORE_CONFIG.supabasePublishableKey || ROOT_CONFIG.supabaseAnonKey || "";
+  const FUNCTIONS_BASE_URL = String(STORE_CONFIG.functionsBaseUrl || `${SUPABASE_URL}/functions/v1`).replace(/\/+$/, "");
+  const PAYPAL_CLIENT_ID = currentPayPalClientId();
   const TOKEN_KEY = "xiaxguang_latest_download_token";
   const LICENSE_ORDER = ["BASIC", "PREMIUM", "UNLIMITED"];
   const REQUESTED_BEAT = new URLSearchParams(window.location.search).get("beat") || "";
@@ -78,6 +81,13 @@
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+  function currentPayPalClientId() {
+    const ids = STORE_CONFIG.paypalClientIds || {};
+    if (ids[STORE_MODE]) return String(ids[STORE_MODE]).trim();
+    if (STORE_MODE === "sandbox" && STORE_CONFIG.paypalClientId) return String(STORE_CONFIG.paypalClientId).trim();
+    return "";
+  }
+
   function safeUrl(value, fallback = "#") {
     const url = String(value || "").trim();
     if (!url) return fallback;
@@ -87,13 +97,13 @@
 
   function updateModeNote() {
     if (!modeNote) return;
-    modeNote.textContent = STORE_CONFIG.mode === "live"
+    modeNote.textContent = STORE_MODE === "live"
       ? "目前付款流程使用 PayPal 正式收款模式。"
       : "目前付款流程使用 PayPal Sandbox 測試模式；日後可於設定切換正式收款。";
   }
 
   function configReady() {
-    return Boolean(SUPABASE_URL && SUPABASE_KEY && STORE_CONFIG.paypalClientId);
+    return Boolean(SUPABASE_URL && SUPABASE_KEY && FUNCTIONS_BASE_URL && PAYPAL_CLIENT_ID);
   }
 
   function createClient() {
@@ -373,7 +383,7 @@
 
       const script = document.createElement("script");
       script.id = "paypal-sdk";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(STORE_CONFIG.paypalClientId)}&currency=${encodeURIComponent(STORE_CONFIG.currency || "USD")}&intent=capture&components=buttons`;
+      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(PAYPAL_CLIENT_ID)}&currency=${encodeURIComponent(STORE_CONFIG.currency || "USD")}&intent=capture&components=buttons`;
       script.async = true;
       script.onload = () => window.paypal?.Buttons ? resolve(window.paypal) : reject(new Error("PayPal SDK 載入失敗。"));
       script.onerror = () => reject(new Error("PayPal SDK 載入失敗。"));
@@ -384,7 +394,7 @@
   }
 
   async function callEdgeFunction(name, body) {
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/${name}`, {
+    const response = await fetch(`${FUNCTIONS_BASE_URL}/${name}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -512,7 +522,7 @@
     checkoutClose?.focus();
 
     if (!configReady()) {
-      setStatus("付款設定尚未完成，請聯絡 Xiaxguang。", "error");
+      setStatus(STORE_MODE === "live" ? "正式收款設定尚未完成，請先補上 PayPal Live Client ID。" : "付款設定尚未完成，請聯絡 Xiaxguang。", "error");
       return;
     }
 
